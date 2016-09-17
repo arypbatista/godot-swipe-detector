@@ -20,6 +20,9 @@ export var duration_threshold = 0.05
 # "A swipe will be captured if it has at least {{min_points}} points
 export var min_points = 2
 
+# Enable or disable gesture detection
+export var detect_gesture = true setget detect
+
 
 class SwipeGesture:
 	# Stores swipe data
@@ -69,13 +72,13 @@ class SwipeGesture:
 
 
 
-var capturingGesture = false
-var gestureHistory
+var capturing_gesture = false
+var gesture_history
 var gesture
 
 
 func _ready():
-	gestureHistory = []
+	gesture_history = []
 
 
 func detect(detect=true):
@@ -86,19 +89,19 @@ func detect(detect=true):
 
 
 func _process(delta):
-	if not capturingGesture and swiping():
+	if not capturing_gesture and swiping():
 		start_capture()
 		add_gesture_data(swipePoint(), delta)
-	elif capturingGesture and swiping():
+	elif capturing_gesture and swiping():
 		if gesture.last_point().distance_to(swipePoint()) > distance_threshold:
 			add_gesture_data(swipePoint(), delta)
-	elif capturingGesture and not swiping():
+	elif capturing_gesture and not swiping():
 		end_capture()
 
 	
 func clean_state():
 	gesture = null
-	capturingGesture = false
+	capturing_gesture = false
 
 
 func swiping():
@@ -112,7 +115,7 @@ func swipePoint():
 func start_capture():
 	#print('Started gesture on: ', swipePoint())
 	gesture = SwipeGesture.new()
-	capturingGesture = true
+	capturing_gesture = true
 	return self
 
 func end_capture():
@@ -121,7 +124,7 @@ func end_capture():
 	if gesture.point_count() > min_points and gesture.get_duration() > duration_threshold:
 		print('Captured gesture!')
 		emit_signal("swiped", gesture)
-		gestureHistory.append(gesture)
+		gesture_history.append(gesture)
 	clean_state()
 	return self
 
@@ -134,7 +137,7 @@ func add_gesture_data(point, delta=0):
 
 		
 func history():
-	return gestureHistory
+	return gesture_history
 
 
 func set_duration_threshold(value):
