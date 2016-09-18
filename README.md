@@ -41,10 +41,12 @@ points on the gesture, smaller this number, bigger the point count you will get
 - **Duration Threshold**: Indicates how long a gesture needs to last to be 
 considered as a gesture. You can calibrate the swipe detector so you don't 
 accidentally swipe when intended to click.
+- **Limit Duration**: Indicates whether to limit swipe by duration or not.
+- **Maximum Duration**: Indicates the maximum duration for a swipe.
 - **Minimum Points**: Indicates how many points makes a gesture. You may only 
 admit complex gestures with more than six points, for example.
 - **Limit Points**: Indicates whether to limit swipe count points or not.
-- **Maximum Points**: Indicates the maximum point count for swipe.
+- **Maximum Points**: Indicates the maximum point count for a swipe.
 
 
 ## Signals
