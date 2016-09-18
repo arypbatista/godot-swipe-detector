@@ -9,4 +9,4 @@ func has(point):
 
 func impulse(speed, angle=0):
 	print('Applying impulse to object. Speed: ', speed, ', Angle: ', angle)
-	set_linear_velocity(Vector2(0, -speed).rotated(angle))
+	apply_impulse(Vector2(0,0), Vector2(0, -speed).rotated(angle))
