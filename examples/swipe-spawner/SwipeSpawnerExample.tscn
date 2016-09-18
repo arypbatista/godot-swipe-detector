@@ -9,6 +9,8 @@ script/script = ExtResource( 1 )
 
 [node name="SwipeDetector" parent="." instance=ExtResource( 2 )]
 
+limit_duration = false
+maximum_duration = -1.0
 limit_points = false
 maximum_points = -1
 

@@ -28,6 +28,9 @@ signal swipe_failed()
 
 ## Exported Variables
 
+# Enable or disable gesture detection
+export var detect_gesture = true setget detect
+
 # Minimum distance between points
 export var distance_threshold = 25.0
 
@@ -35,6 +38,11 @@ export var distance_threshold = 25.0
 # "A swipe will be a swipe if it the duration 
 # is at least {{duration_threshold}} seconds"
 export var duration_threshold = 0.05
+
+# Maximum duration
+# You can the maximum swipe duration
+export var limit_duration = false
+export var maximum_duration = -1.0
 
 # Minimum swipe points
 # "A swipe will be captured if it has at least {{minimum_points}} points
@@ -44,9 +52,6 @@ export var minimum_points = 2
 # You can limit points captured so a Swipe will end prematurely
 export var limit_points = false
 export var maximum_points = -1
-
-# Enable or disable gesture detection
-export var detect_gesture = true setget detect
 
 
 ## Implementation
@@ -68,8 +73,14 @@ func detect(detect=true):
 		clean_state()
 	return self
 
+func reached_point_limit():
+	return limit_points and gesture.point_count() >= maximum_points
+	
+func reached_duration_limit():
+	return limit_duration and gesture.get_duration() >= maximum_duration
+	
 func reached_limit():
-	return limit_points and gesture.point_count() >= maximum_points -1
+	return reached_point_limit() or reached_duration_limit()
 
 func _process(delta):
 	if not capturing_gesture and swiping_started():

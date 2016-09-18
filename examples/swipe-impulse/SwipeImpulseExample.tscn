@@ -111,6 +111,8 @@ _update_shape_index = 3
 
 [node name="SwipeDetector" parent="." instance=ExtResource( 3 )]
 
+limit_duration = false
+maximum_duration = -1.0
 limit_points = false
 maximum_points = -1
 
