@@ -149,10 +149,30 @@ class SwipeGesture:
 	var points # list of points
 	var duration # in seconds
 	
+	var distance
+	var distance_points
+	
 	func _init():
 		points = []
 		duration = 0
-		
+	
+	func get_distance():
+		if not distance and distance_points != points.size():
+			distance = calculate_distance()
+			distance_points = points.size()
+		return distance
+	
+	func calculate_distance():
+		var last = points[0]
+		var distance = 0
+		for point in points:
+			distance = last.distance_to(point)
+			last = point
+		return distance
+	
+	func get_speed():
+		return get_distance() / get_duration() 
+	
 	func get_duration():
 		return duration
 	
@@ -163,17 +183,17 @@ class SwipeGesture:
 	func add_point(point):
 		points.append(point)
 		return self
-
+	
 	func first_point():
 		return points[0]
-
+	
 	func last_point():
 		return points[points.size() - 1]
-
+	
 	func to_string():
 		return ('Swipe ' + str(first_point()) + ':' + str(last_point()) + 
 			   ' ' + str(points.size()) + ', length: ' + str(duration))
-	
+
 
 	func get_curve():
 		# Get a Curve2D from swipe points		
