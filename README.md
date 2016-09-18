@@ -42,6 +42,15 @@ func swiped(gesture):
 
 See the [examples folder](./examples) for more examples.
 
+## Signals
+
+- `swiped(gesture)` - Signal triggered when swipe captured.
+- `swipe_ended(gesture)` - Alias for `swiped(gesture)`.
+- `swipe_started(point)` - Signal triggered when swipe started.
+- `swipe_updated(point)` - Signal triggered when gesture is updated.
+- `swipe_updated_with_delta(point, delta)` - Signal triggered when gesture is updated. `delta` parameter indicates time delta from last update.
+- `swipe_failed()` - Signal triggered when swipe failed. This means the swipe didn't pass thresholds and requirements to be detected as swipe.
+
 ## `SwipeGesture` object
 
 The `SwipeGesture` object stores all the information gathered from the gesture.
