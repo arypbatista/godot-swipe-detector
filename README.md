@@ -3,21 +3,9 @@ Detect gestures and swipes in your game.
 
 ## Usage
 
-Add the script to a node in your scene and connect to the `swiped` signal.
+Add the script to a node in your scene and connect to the [signals](#signals).
+There are many [options available](#options-exported-variables) to customize Swipe Detector's behavior.
 
-There are some options available such as *distance threshold*, *duration threshold*
-and *minimum points*. 
-
-The *distance threshold* indicates which is the minimum distance
-between two points on the gesture, smaller this number, bigger the point
-count you will get (i.e. more precisse information).
-
-The *duration threshold* indicates how long a gesture needs to last to be 
-considered as a gesture. You can calibrate the swipe detector so you don't
-accidentally swipe when intended to click.
-
-The *minimum points* indicates how many points makes a gesture. You may only
-admit complex gestures with more than six points, for example.
 
 When swipe is detected, you will receive a `SwipeGesture` object with all
 the gesture information. This includes `points` conforming the gesture
@@ -41,6 +29,23 @@ func swiped(gesture):
 ```
 
 See the [examples folder](./examples) for more examples.
+
+## Options (Exported Variables)
+
+There are some options available:
+
+- **Detect Gesture**: Indicates whether detector should detect or not swiping.
+- **Distance Threshold**: Indicates which is the minimum distance between two 
+points on the gesture, smaller this number, bigger the point count you will get
+(i.e. more precisse information).
+- **Duration Threshold**: Indicates how long a gesture needs to last to be 
+considered as a gesture. You can calibrate the swipe detector so you don't 
+accidentally swipe when intended to click.
+- **Minimum Points**: Indicates how many points makes a gesture. You may only 
+admit complex gestures with more than six points, for example.
+- **Limit Points**: Indicates whether to limit swipe count points or not.
+- **Maximum Points**: Indicates the maximum point count for swipe.
+
 
 ## Signals
 
