@@ -6,8 +6,13 @@
 [node name="SwipeSignalsExample" type="Node2D"]
 
 script/script = ExtResource( 1 )
+point_scale_step = 0.1
+max_scale = 5.0
 
 [node name="SwipeDetector" parent="." instance=ExtResource( 2 )]
+
+limit_points = false
+maximum_points = -1
 
 [node name="Points" type="Node2D" parent="."]
 

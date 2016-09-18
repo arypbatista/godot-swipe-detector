@@ -111,6 +111,9 @@ _update_shape_index = 3
 
 [node name="SwipeDetector" parent="." instance=ExtResource( 3 )]
 
+limit_points = false
+maximum_points = -1
+
 [connection signal="swipe_ended" from="SwipeDetector" to="." method="_on_SwipeDetector_swipe_ended"]
 
 [connection signal="swipe_started" from="SwipeDetector" to="." method="_on_SwipeDetector_swipe_started"]

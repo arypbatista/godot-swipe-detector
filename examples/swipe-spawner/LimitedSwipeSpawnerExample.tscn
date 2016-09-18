@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=1]
 
-[ext_resource path="res://examples/swipe-spawner/SwipeSpawnerExample.gd" type="Script" id=1]
+[ext_resource path="res://examples/swipe-spawner/LimitedSwipeSpawnerExample.gd" type="Script" id=1]
 [ext_resource path="res://SwipeDetector.tscn" type="PackedScene" id=2]
 
-[node name="SwipeSpawnerExample" type="Node2D"]
+[node name="LimitedSwipeSpawnerExample" type="Node2D"]
 
 script/script = ExtResource( 1 )
 
@@ -25,7 +25,7 @@ margin/left = 10.0
 margin/top = 10.0
 margin/right = 162.0
 margin/bottom = 24.0
-text = "Swipe Spawner Example"
+text = "Limited Swipe Spawner Example"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1

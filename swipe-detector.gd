@@ -40,21 +40,27 @@ export var duration_threshold = 0.05
 # "A swipe will be captured if it has at least {{minimum_points}} points
 export var minimum_points = 2
 
+# Maximum points
+# You can limit points captured so a Swipe will end prematurely
+export var limit_points = false
+export var maximum_points = -1
+
 # Enable or disable gesture detection
 export var detect_gesture = true setget detect
 
 
 ## Implementation
 
-var capturing_gesture = false
+var capturing_gesture
 var gesture_history
 var gesture
 var last_update_delta
-
+var was_swiping
 
 func _ready():
 	gesture_history = []
-
+	capturing_gesture = false
+	was_swiping = false
 
 func detect(detect=true):
 	set_process(detect)
@@ -62,21 +68,29 @@ func detect(detect=true):
 		clean_state()
 	return self
 
+func reached_limit():
+	return limit_points and gesture.point_count() >= maximum_points -1
 
 func _process(delta):
-	if not capturing_gesture and swiping():
+	if not capturing_gesture and swiping_started():
 		swipe_start()
-	elif capturing_gesture and swiping():
+	elif capturing_gesture and swiping() and not reached_limit():
 		swipe_update(delta)
+	elif capturing_gesture and swiping() and reached_limit():
+		swipe_stop(true)
 	elif capturing_gesture and not swiping():
 		swipe_stop()
+	was_swiping = swiping()
 
 	
 func clean_state():
 	gesture = null
 	last_update_delta = null
 	capturing_gesture = false
+	
 
+func swiping_started():
+	return not was_swiping and swiping()
 
 func swiping():
 	return Input.is_mouse_button_pressed(BUTTON_LEFT)
@@ -96,11 +110,12 @@ func swipe_start():
 	return self
 
 
-func swipe_stop():
-	#print('Ended gesture')
-	print(gesture.to_string())
+func swipe_stop(forced=false):
 	if gesture.point_count() > minimum_points and gesture.get_duration() > duration_threshold:
-		print('Captured gesture!')
+		
+		if forced:
+			capturing_gesture = false
+			
 		emit_signal('swiped', gesture)
 		emit_signal('swipe_ended', gesture)
 		gesture_history.append(gesture)
@@ -193,7 +208,6 @@ class SwipeGesture:
 	func to_string():
 		return ('Swipe ' + str(first_point()) + ':' + str(last_point()) + 
 			   ' ' + str(points.size()) + ', length: ' + str(duration))
-
 
 	func get_curve():
 		# Get a Curve2D from swipe points		
