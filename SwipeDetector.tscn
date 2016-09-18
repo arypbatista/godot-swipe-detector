@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://swipe-detector.gd" type="Script" id=1]
+
+[node name="SwipeDetector" type="Node2D"]
+
+script/script = ExtResource( 1 )
+distance_threshold = 25.0
+duration_threshold = 0.05
+minimum_points = 2
+detect_gesture = true
+
+

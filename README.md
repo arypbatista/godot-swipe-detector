@@ -40,6 +40,8 @@ func swiped(gesture):
 		add_child(cloud)
 ```
 
+See the [examples folder](./examples) for more examples.
+
 ## `SwipeGesture` object
 
 The `SwipeGesture` object stores all the information gathered from the gesture.
