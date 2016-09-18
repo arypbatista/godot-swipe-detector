@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=1]
 
-[ext_resource path="res://examples/swipe-spawner/SwipeSpawnerExample.gd" type="Script" id=1]
+[ext_resource path="res://examples/swipe-trail/SwipeTrailExample.gd" type="Script" id=1]
 [ext_resource path="res://SwipeDetector.tscn" type="PackedScene" id=2]
 [ext_resource path="res://examples/swipe-trail/trail-particle.png" type="Texture" id=3]
 
