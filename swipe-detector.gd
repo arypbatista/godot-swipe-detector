@@ -31,6 +31,11 @@ signal swipe_failed()
 # Enable or disable gesture detection
 export var detect_gesture = true setget detect
 
+# Determine process method to be used
+const PROCESS_FIXED = 'Fixed'
+const PROCESS_IDLE  = 'Idle'
+export (String, 'Idle', 'Fixed') var process_method = PROCESS_FIXED
+
 # Minimum distance between points
 export var distance_threshold = 25.0
 
@@ -61,14 +66,25 @@ var gesture_history
 var gesture
 var last_update_delta
 var was_swiping
+var swipe_input
 
 func _ready():
 	gesture_history = []
 	capturing_gesture = false
 	was_swiping = false
+	swipe_input = MouseSwipeInput.new(self)
+
+func on_touch_device():
+	return OS.get_name() in ['Android', 'iOS'] 
+
+func set_swipe_process(method, value):
+	if method == PROCESS_IDLE:
+		set_process(value)
+	elif method == PROCESS_FIXED:
+		set_fixed_process(value)
 
 func detect(detect=true):
-	set_process(detect)
+	set_swipe_process(process_method, detect)
 	if not detect:
 		clean_state()
 	return self
@@ -82,7 +98,13 @@ func reached_duration_limit():
 func reached_limit():
 	return reached_point_limit() or reached_duration_limit()
 
+func _fixed_process(delta):
+	process_swipe(delta)
+
 func _process(delta):
+	process_swipe(delta)
+
+func process_swipe(delta, event=null):
 	if not capturing_gesture and swiping_started():
 		swipe_start()
 	elif capturing_gesture and swiping() and not reached_limit():
@@ -104,15 +126,15 @@ func swiping_started():
 	return not was_swiping and swiping()
 
 func swiping():
-	return Input.is_mouse_button_pressed(BUTTON_LEFT)
+	return swipe_input.swiping()
 
 
-func swipePoint():
-	return get_viewport().get_mouse_pos()
+func swipe_point():
+	return swipe_input.swipe_point()
 
 
 func swipe_start():
-	var point = swipePoint()
+	var point = swipe_point()
 	capturing_gesture = true
 	last_update_delta = 0
 	gesture = SwipeGesture.new()
@@ -137,7 +159,7 @@ func swipe_stop(forced=false):
 
 
 func swipe_update(delta):
-	var point = swipePoint()
+	var point = swipe_point()
 	last_update_delta += delta
 	if gesture.last_point().distance_to(point) > distance_threshold:
 		add_gesture_data(point, last_update_delta)
@@ -232,3 +254,25 @@ class SwipeGesture:
 		
 	func point_count():
 		return points.size()
+
+
+## Swipe Input
+
+class SwipeInput:
+	
+	var detector
+	
+	func _init(detector):
+		self.detector = detector
+
+
+class MouseSwipeInput extends SwipeInput:
+
+	func _init(detector).(detector):
+		pass
+
+	func swiping():
+		return Input.is_mouse_button_pressed(BUTTON_LEFT)
+		
+	func swipe_point():
+		return self.detector.get_viewport().get_mouse_pos()

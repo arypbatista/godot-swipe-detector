@@ -35,6 +35,7 @@ See the [examples folder](./examples) for more examples.
 There are some options available:
 
 - **Detect Gesture**: Indicates whether detector should detect or not swiping.
+- **Process Method**: Indicates the process method to be used (Fixed or Idle).
 - **Distance Threshold**: Indicates which is the minimum distance between two 
 points on the gesture, smaller this number, bigger the point count you will get
 (i.e. more precisse information).
@@ -65,6 +66,8 @@ The `SwipeGesture` object stores all the information gathered from the gesture.
 Methods intended for public usage are:
 
 - `get_duration()` - Get gesture duration.
+- `get_distance()` - Get the path distance from the first to the last point.
+- `get_speed()` - Distance divided by duration of swipe.
 - `get_points()` - Obtain the points conforming the gesture.
 - `get_curve()` - Get a Curve2D built from gesture points.
 - `first_point()` - Get the first point of the gesture.

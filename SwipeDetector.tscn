@@ -5,9 +5,14 @@
 [node name="SwipeDetector" type="Node2D"]
 
 script/script = ExtResource( 1 )
+detect_gesture = true
+process_method = null
 distance_threshold = 25.0
 duration_threshold = 0.05
+limit_duration = false
+maximum_duration = -1.0
 minimum_points = 2
-detect_gesture = true
+limit_points = false
+maximum_points = -1
 
 

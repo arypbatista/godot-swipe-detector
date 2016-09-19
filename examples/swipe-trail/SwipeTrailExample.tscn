@@ -10,6 +10,7 @@ script/script = ExtResource( 1 )
 
 [node name="SwipeDetector" parent="." instance=ExtResource( 2 )]
 
+process_method = "Idle"
 distance_threshold = 0.01
 
 [node name="Label" type="Label" parent="."]
