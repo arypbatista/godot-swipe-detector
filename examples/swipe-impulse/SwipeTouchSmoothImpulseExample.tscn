@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://examples/swipe-impulse/SwipeSmoothImpulseExample.gd" type="Script" id=1]
-[ext_resource path="res://examples/swipe-impulse/Point.tscn" type="PackedScene" id=2]
+[ext_resource path="res://examples/swipe-impulse/TouchPoint.tscn" type="PackedScene" id=2]
 [ext_resource path="res://SwipeDetector.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -14,7 +14,7 @@ extents = Vector2( 10, 328.79 )
 custom_solver_bias = 0.0
 extents = Vector2( 542.398, 9.47275 )
 
-[node name="SwipeImpulseExample" type="Node2D"]
+[node name="SwipeTouchImpulseExample" type="Node2D"]
 
 script/script = ExtResource( 1 )
 
@@ -27,38 +27,34 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 10.0
 margin/top = 10.0
-margin/right = 257.0
+margin/right = 215.0
 margin/bottom = 24.0
-text = "Swipe Smooth Impulse Example"
+text = "Swipe Touch Smooth Impulse Example"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
 [node name="Points" type="Node2D" parent="."]
 
-[node name="Point" parent="Points" instance=ExtResource( 2 )]
+[node name="TouchPoint" parent="Points" instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 131.235, 182.499 )
+transform/pos = Vector2( 207.105, 186.6 )
 
-[node name="Point1" parent="Points" instance=ExtResource( 2 )]
+[node name="TouchPoint1" parent="Points" instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 397.806, 153.791 )
+transform/pos = Vector2( 771.005, 112.78 )
 
-[node name="Point2" parent="Points" instance=ExtResource( 2 )]
+[node name="TouchPoint2" parent="Points" instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 307.582, 305.531 )
+transform/pos = Vector2( 586.456, 385.503 )
 
-[node name="Point3" parent="Points" instance=ExtResource( 2 )]
+[node name="TouchPoint3" parent="Points" instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 638.576, 221.105 )
+transform/pos = Vector2( 826.37, 352.694 )
 
-[node name="Point5" parent="Points" instance=ExtResource( 2 )]
+[node name="TouchPoint4" parent="Points" instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 851.397, 311.786 )
-
-[node name="Point4" parent="Points" instance=ExtResource( 2 )]
-
-transform/pos = Vector2( 645.922, 436.766 )
+transform/pos = Vector2( 164.044, 485.979 )
 
 [node name="Bounds" type="StaticBody2D" parent="."]
 

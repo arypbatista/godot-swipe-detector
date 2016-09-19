@@ -2,7 +2,7 @@ extends RigidBody2D
 
 
 func collision_radius():
-	return get_node('CollisionShape2D').get_shape().get_radius()
+	return get_node('SwipeArea').get_shape().get_radius()
 
 func has(point):
 	return get_pos().distance_to(point) <= collision_radius()
