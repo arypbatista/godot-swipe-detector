@@ -11,8 +11,7 @@ script/script = ExtResource( 1 )
 
 limit_duration = true
 maximum_duration = 1.0
-limit_points = false
-maximum_points = -1
+debug_mode = false
 
 [node name="Points" type="Node2D" parent="."]
 

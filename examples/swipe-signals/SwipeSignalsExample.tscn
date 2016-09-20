@@ -1,7 +1,18 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://examples/swipe-signals/SwipeSignalsExample.gd" type="Script" id=1]
-[ext_resource path="res://SwipeDetector.tscn" type="PackedScene" id=2]
+[ext_resource path="res://examples/TestReferences.tscn" type="PackedScene" id=2]
+[ext_resource path="res://SwipeDetector.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 1624.01, 107.4 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 113.472, 377.909 )
 
 [node name="SwipeSignalsExample" type="Node2D"]
 
@@ -9,12 +20,11 @@ script/script = ExtResource( 1 )
 point_scale_step = 0.1
 max_scale = 5.0
 
-[node name="SwipeDetector" parent="." instance=ExtResource( 2 )]
+[node name="TestReferences" parent="." instance=ExtResource( 2 )]
 
-limit_duration = false
-maximum_duration = -1.0
-limit_points = false
-maximum_points = -1
+[node name="SwipeDetector" parent="." instance=ExtResource( 3 )]
+
+debug_mode = false
 
 [node name="Points" type="Node2D" parent="."]
 
@@ -34,10 +44,52 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
+[node name="KillZone" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 526.81, 856.329 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 2 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, -983.91, 357.645 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 2 )
+shapes/2/transform = Matrix32( 0.999999, 0, 0, 1, 2030.89, 361.849 )
+shapes/2/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
+
+transform/pos = Vector2( 526.81, 856.329 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="CollisionShape2D 2" type="CollisionShape2D" parent="KillZone"]
+
+transform/pos = Vector2( -983.91, 357.645 )
+transform/scale = Vector2( 1, 1 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 1
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="KillZone"]
+
+transform/pos = Vector2( 2030.89, 361.849 )
+transform/scale = Vector2( 0.999999, 1 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 2
+
 [connection signal="swipe_ended" from="SwipeDetector" to="." method="_on_SwipeDetector_swipe_ended"]
 
 [connection signal="swipe_started" from="SwipeDetector" to="." method="_on_SwipeDetector_swipe_started"]
 
 [connection signal="swipe_updated" from="SwipeDetector" to="." method="_on_SwipeDetector_swipe_updated"]
+
+[connection signal="body_enter" from="KillZone" to="." method="_on_KillZone_body_enter"]
 
 

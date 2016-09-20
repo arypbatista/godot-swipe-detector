@@ -48,6 +48,7 @@ accidentally swipe when intended to click.
 admit complex gestures with more than six points, for example.
 - **Limit Points**: Indicates whether to limit swipe count points or not.
 - **Maximum Points**: Indicates the maximum point count for a swipe.
+- **Debug Mode**: Enable/Disable debug output on console.
 
 
 ## Signals

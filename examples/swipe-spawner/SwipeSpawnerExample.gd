@@ -3,6 +3,7 @@ extends Node2D
 const Point = preload('./Point.tscn')
 
 func _on_SwipeDetector_swiped( gesture ):
+	print('Duration: ', gesture.get_duration())
 	for point in gesture.get_points():
 		spawn_point(point)
 		

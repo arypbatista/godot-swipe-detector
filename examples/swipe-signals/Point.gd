@@ -18,6 +18,11 @@ func _ready():
 	apply_scale(point_scale)
 
 
+func colorize(color):
+	get_node('Sprite').set_modulate(color)
+	return self
+	
+
 func set_point_scale(scale):
 	point_scale = scale
 	if ready:
