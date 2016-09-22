@@ -1,5 +1,5 @@
 # godot-swipe-detector
-Detect gestures and swipes in your game.
+Swipe Detector is a swipe detection script that monitor screen input (mouse/touch) triggering different signals informing swipe progress or swipe finalization. There are a lot of configurations available to indicate detector when to consider a movement to a swipe or to indicate the precision of the detected swipe curve. On swipe end you will obtain a ﻿SwipeGesture﻿ object that holds swipe information such as duration, speed, distance (from initial point), points, Curve2D.
 
 ## Usage
 
