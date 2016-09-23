@@ -124,7 +124,7 @@ admit complex gestures with more than six points, for example.
 - `pattern_detected(pattern_name, actual_gesture)` - Signal triggered when gesture matches predefined pattern.
 
 
-#### Public API Methods
+### Public API Methods
 
 Methods intended for public usage are:
 
