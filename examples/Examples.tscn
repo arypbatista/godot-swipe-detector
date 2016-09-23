@@ -2,20 +2,21 @@
 
 [sub_resource type="GDScript" id=1]
 
-script/source = "extends Container\n\n\nvar options\n\nfunc _ready():\n\toptions = get_node(\'PanelContainer/HBoxContainer/VBoxContainer/OptionButton\')\n\toptions.add_item(\'swipe-spawner/SwipeSpawner\')\n\toptions.add_item(\'swipe-spawner/PointLimitedSwipeSpawner\')\n\toptions.add_item(\'swipe-spawner/DurationLimitedSwipeSpawner\')\n\toptions.add_item(\'swipe-impulse/SwipeImpulse\')\n\toptions.add_item(\'swipe-impulse/SwipeSmoothImpulse\')\n\toptions.add_item(\'swipe-impulse/SwipeTouchSmoothImpulse\')\n\toptions.add_item(\'swipe-signals/SwipeSignals\')\n\toptions.add_item(\'swipe-trail/SwipeTrail\')\n\nfunc launch():\n\tvar selected_example = 0\n\tif options.get_selected() > 0:\n\t\tselected_example = options.get_selected()\n\t\t\n\tprint(\'Selected example \', selected_example)\n\tload_example(options.get_item_text(selected_example))\n\nfunc load_example(example):\n\tprint(\'Loading example \', example)\n\tget_tree().change_scene(\'res://examples/\' + example + \'Example.tscn\')\n"
+script/source = "extends Container\n\n\nvar options\n\nfunc _ready():\n\toptions = get_node(\'PanelContainer/HBoxContainer/VBoxContainer/OptionButton\')\n\toptions.add_item(\'swipe-spawner/SwipeSpawner\')\n\toptions.add_item(\'swipe-spawner/PointLimitedSwipeSpawner\')\n\toptions.add_item(\'swipe-spawner/DurationLimitedSwipeSpawner\')\n\toptions.add_item(\'swipe-impulse/SwipeImpulse\')\n\toptions.add_item(\'swipe-impulse/SwipeSmoothImpulse\')\n\toptions.add_item(\'swipe-impulse/SwipeTouchSmoothImpulse\')\n\toptions.add_item(\'swipe-signals/SwipeSignals\')\n\toptions.add_item(\'swipe-trail/SwipeTrail\')\n\toptions.add_item(\'gesture-detection/GestureDetection\')\n\toptions.add_item(\'gesture-detection/GestureDetectionWithPatterns\')\n\nfunc launch():\n\tvar selected_example = 0\n\tif options.get_selected() > 0:\n\t\tselected_example = options.get_selected()\n\t\t\n\tprint(\'Selected example \', selected_example)\n\tload_example(options.get_item_text(selected_example))\n\nfunc load_example(example):\n\tprint(\'Loading example \', example)\n\tget_tree().change_scene(\'res://examples/\' + example + \'Example.tscn\')\n"
 
 [node name="Examples" type="Container"]
 
 anchor/right = 1
 anchor/bottom = 1
+rect/scale = Vector2( 2, 2 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 0.0
-margin/bottom = 0.0
+margin/right = 480.0
+margin/bottom = 320.0
 script/script = SubResource( 1 )
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -39,8 +40,8 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 7.0
 margin/top = 7.0
-margin/right = 753.0
-margin/bottom = 433.0
+margin/right = 273.0
+margin/bottom = 121.0
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
@@ -49,10 +50,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 0
 size_flags/vertical = 2
-margin/left = 315.0
+margin/left = 75.0
 margin/top = 0.0
-margin/right = 431.0
-margin/bottom = 426.0
+margin/right = 191.0
+margin/bottom = 114.0
 custom_constants/separation = 30
 alignment = 1
 
@@ -63,9 +64,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 0.0
-margin/top = 156.0
+margin/top = 0.0
 margin/right = 116.0
-margin/bottom = 170.0
+margin/bottom = 14.0
 text = "Select an Example"
 align = 1
 percent_visible = 1.0
@@ -79,9 +80,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 200.0
+margin/top = 44.0
 margin/right = 116.0
-margin/bottom = 220.0
+margin/bottom = 64.0
 toggle_mode = true
 click_on_press = true
 enabled_focus_mode = 2
@@ -98,9 +99,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 250.0
+margin/top = 94.0
 margin/right = 116.0
-margin/bottom = 270.0
+margin/bottom = 114.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null

@@ -1,0 +1,145 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://examples/gesture-detection/GestureDetectionExample.gd" type="Script" id=1]
+[ext_resource path="res://SwipeDetector.tscn" type="PackedScene" id=2]
+[ext_resource path="res://examples/gesture-detection/trail-particle.png" type="Texture" id=3]
+[ext_resource path="res://examples/gesture-detection/TrailGhost.tscn" type="PackedScene" id=4]
+
+[node name="GestureDetectionExample" type="Node2D"]
+
+script/script = ExtResource( 1 )
+
+[node name="RecordedGesture" type="Node2D" parent="."]
+
+[node name="MatchGesture" type="Node2D" parent="."]
+
+[node name="RecordingLabel" type="Label" parent="."]
+
+visibility/visible = false
+rect/scale = Vector2( 3, 3 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 367.0
+margin/top = 281.0
+margin/right = 450.0
+margin/bottom = 295.0
+text = "Recording..."
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="SwipeDetector" parent="." instance=ExtResource( 2 )]
+
+distance_threshold = 80.0
+minimum_points = 3
+pattern_detection_score_threshold = 80
+debug_mode = false
+
+[node name="RecordButton" type="Button" parent="."]
+
+rect/scale = Vector2( 2, 2 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 707.0
+margin/top = 550.0
+margin/right = 818.0
+margin/bottom = 579.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Record Gesture"
+flat = false
+
+[node name="ExampleLabel 2" type="Label" parent="."]
+
+rect/scale = Vector2( 2, 2 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 18.0
+margin/top = 16.0
+margin/right = 101.0
+margin/bottom = 30.0
+text = "Gesture Detection Example"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Trail" type="Particles2D" parent="."]
+
+transform/pos = Vector2( -118.912, 157.892 )
+config/amount = 32
+config/lifetime = 0.2
+config/emitting = false
+config/local_space = false
+config/texture = ExtResource( 3 )
+params/direction = 0.0
+params/spread = 10.0
+params/linear_velocity = 0.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 0.0
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 1.0
+params/final_size = 1.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+color/color = Color( 1, 0.609375, 0, 1 )
+
+[node name="TrailGhost" parent="." instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 670.529, 580.305 )
+modulate = Color( 0.898438, 0.765076, 0.765076, 1 )
+
+[node name="Match" type="VBoxContainer" parent="."]
+
+editor/display_folded = true
+visibility/visible = false
+rect/scale = Vector2( 2, 2 )
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 18.0
+margin/top = 529.0
+margin/right = 112.0
+margin/bottom = 567.0
+custom_constants/separation = 10
+alignment = 0
+
+[node name="ResultLabel" type="Label" parent="Match"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = -2.0
+margin/top = 28.0
+margin/right = 104.0
+margin/bottom = 42.0
+text = "Match Detected!"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[connection signal="pattern_detected" from="SwipeDetector" to="." method="_on_SwipeDetector_pattern_detected"]
+
+[connection signal="swipe_ended" from="SwipeDetector" to="." method="_on_SwipeDetector_swipe_ended"]
+
+[connection signal="swipe_started" from="SwipeDetector" to="." method="_on_SwipeDetector_swipe_started"]
+
+[connection signal="swipe_updated" from="SwipeDetector" to="." method="_on_SwipeDetector_swipe_updated"]
+
+[connection signal="pressed" from="RecordButton" to="." method="_on_RecordButton_pressed"]
+
+

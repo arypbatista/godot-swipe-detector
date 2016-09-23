@@ -12,6 +12,7 @@ script/script = ExtResource( 1 )
 
 process_method = "Idle"
 distance_threshold = 0.01
+debug_mode = false
 
 [node name="Label" type="Label" parent="."]
 

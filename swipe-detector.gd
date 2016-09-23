@@ -25,6 +25,8 @@ signal swipe_updated_with_delta(point, delta)
 # to be detected as swipe.
 signal swipe_failed()
 
+# Signal triggered when gesture detected
+signal pattern_detected(pattern_name, actual_gesture)
 
 ## Exported Variables
 
@@ -58,6 +60,9 @@ export var minimum_points = 2
 export var limit_points = false
 export var maximum_points = -1
 
+# Threshold for gesture detection
+export var pattern_detection_score_threshold = 80
+
 # Debug mode: will print debug information
 export var debug_mode = false
 
@@ -67,22 +72,22 @@ func debug(message, more1='', more2='', more3=''):
 	if debug_mode:
 		print('[DEBUG][SwipeDetector] ', message, more1, more2, more3)
 
-var capturing_gesture
-var gesture_history
+onready var capturing_gesture = false
+onready var gesture_history = []
 var gesture
 var last_update_delta
-var was_swiping
+onready var was_swiping = false
 var swipe_input
-var ready = false
+onready var ready = true
+
+onready var pattern_detections = {}
+
+
 
 func _ready():
-	ready = true
-	gesture_history = []
-	capturing_gesture = false
-	was_swiping = false
-	
 	swipe_input = get_swipe_input()
 	set_swipe_process(process_method, detect_gesture)
+	add_children_as_patterns()
 	
 func _input(ev):
 	swipe_input.process_input(ev)
@@ -175,7 +180,8 @@ func swipe_stop(forced=false):
 		
 		if forced:
 			capturing_gesture = false
-			
+		
+		detect_gestures(gesture)
 		debug('Swipe stopped on point ', gesture.last_point(), ' (forced: ' + str(forced) + ')')
 		emit_signal('swiped', gesture)
 		emit_signal('swipe_ended', gesture)
@@ -217,22 +223,193 @@ func set_distance_threshold(value):
 	distance_threshold = value
 	return self
 
+func points_to_gesture(points):
+	return SwipeGesture.new(points)
+	
+	
+# Gesture/Curve detection methods
+
+func add_pattern_detection(name, gesture):
+	pattern_detections[name] = GesturePattern.new(name, gesture)
+
+func remove_pattern_detections():
+	pattern_detections = {}
+
+func remove_pattern_detection(name):
+	pattern_detections.erase(name)
+
+func add_children_as_patterns():
+	for child in get_children():
+		var gesture = SwipeGesture.new()
+		for point in child.get_children():
+			gesture.add_point(point.get_pos())
+		add_pattern_detection(child.get_name(), gesture)
+
+func detect_gestures(gesture):
+	var best_match
+	for pattern_name in pattern_detections.keys():
+		var actual_match = match_gestures(gesture, pattern_detections[pattern_name])
+		if actual_match.is_match() and (not best_match or actual_match.better_than(best_match)):
+			best_match = actual_match
+	if best_match:
+		debug('Matched gesture "', best_match.pattern.name, '" with score ', str(best_match.score()))
+		emit_signal('pattern_detected', best_match.pattern.name, gesture)
+
+func match_gestures(gestureA, gestureB):
+	return EuclideanMatch.new(gestureA, gestureB, pattern_detection_score_threshold)
+
+## Match classes
+
+class GestureMatch:
+
+	var sample
+	var pattern
+	var score
+	var threshold
+	
+	func _init(sampleGesture, patternGesture, threshold):
+		self.threshold = threshold
+		self.sample = sampleGesture
+		self.pattern = patternGesture
+	
+	func score():
+		if not score:
+			var relative_pattern = pattern.gesture.relative()
+			var relative_sample  = sample.relative()
+			var sample_scale = scale(relative_pattern, relative_sample)
+			var pointsA = points(relative_sample.scale(sample_scale))
+			var pointsB = points(relative_pattern)
+			
+			if pointsA.size() > pointsB.size():
+				pointsA = pick_samples(pointsA, pointsB.size()) 
+			elif pointsB.size() > pointsA.size():
+				pointsB = pick_samples(pointsB, pointsA.size())
+				
+			score = similarity_algorithm().similarity_score(pointsA, pointsB)
+		return score
+		
+	func similarity_algorithm():
+		print('Subclass Responsibility!')
+		breakpoint
+		
+	func is_match():
+		return score() < threshold
+		
+	func points(gesture):
+		var curve = gesture.get_curve()
+		curve.set_bake_interval(min(gesture.get_point(0).distance_to(gesture.get_point(1)), 20))
+		return curve.get_baked_points()
+	
+	func pick_samples(points, pick_count):
+		var spacing = points.size()/pick_count
+		var samples = []
+		for i in range(pick_count):
+			samples.append(points[floor(spacing * i)])
+		return samples
+		
+	func scale(gA, gB):
+		var minGA = gA.get_point(0)
+		var minGB = gB.get_point(0)
+		var maxGA = gA.get_point(0)
+		var maxGB = gB.get_point(0)
+		for i in range(min(gA.get_points().size(), gB.get_points().size())):
+			if gA.get_point(i).distance_to(minGA) > minGA.distance_to(maxGA):
+				maxGA = gA.get_point(i)
+			elif gA.get_point(i).distance_to(maxGA) > minGA.distance_to(maxGA):
+				minGA = gA.get_point(i)
+				
+			if gB.get_point(i).distance_to(minGB) > minGB.distance_to(maxGB):
+				maxGB = gB.get_point(i)
+			elif gB.get_point(i).distance_to(maxGB) > minGB.distance_to(maxGB):
+				minGB = gB.get_point(i)
+		
+		var scale1 = minGA.distance_to(maxGA) / minGB.distance_to(maxGB)
+		
+		return Vector2(scale1, scale1)
+	
+	func better_than(otherMatch):
+		return score() > otherMatch.score()
+
+
+class EuclideanSimilarityAlgorithm:
+	
+	func similarity_score(xs, ys):
+		var sum = 0
+		for i in range(min(xs.size(), ys.size())):
+			sum += point_similarity_score(xs[i], ys[i])
+		return sum / float(min(xs.size(), ys.size()))
+	
+	func point_similarity_score(x, y):
+		if TYPE_VECTOR2 == typeof(x):
+			return x.distance_to(y)
+		else:
+			return abs(x - y)
+
+
+class EuclideanMatch extends GestureMatch:
+	
+	func _init(sample, pattern, threshold).(sample, pattern, threshold):
+		pass
+	
+	func similarity_algorithm():
+		return EuclideanSimilarityAlgorithm.new()
+	
+
+class ShapeSimilarityAlgorithm:
+	
+	func similarity_score(pointsA, pointsB):
+		return EuclideanSimilarityAlgorithm.new().similarity_score(delta_chain(pointsA), delta_chain(pointsB))
+		
+	func delta_chain(points):
+		var chain = []
+		var previous_point
+		for point in points:
+			if previous_point != null:
+				var angle = rad2deg(Vector2(0,0).angle_to_point(point - previous_point))
+				chain.append(angle)
+			previous_point = point
+		return chain
+
+# Don't use yet, lot of false possitives
+class ShapeMatch extends GestureMatch:
+	
+	func _init(sample, pattern, threshold).(sample, pattern, threshold):
+		pass
+	
+	func similarity_algorithm():
+		return ShapeSimilarityAlgorithm.new() 
+	
+	func points(gesture):
+		return gesture.get_points()
+
+## GesturePattern
+
+class GesturePattern:
+	
+	var gesture
+	var name
+	
+	func _init(name, gesture):
+		self.name = name
+		self.gesture = gesture
 
 
 ## SwipeGesture class
 
-class SwipeGesture:
+class SwipeGesture extends Node: # Extend node to access duplicate function
 	# Stores swipe data
 	
 	var points # list of points
 	var duration # in seconds
 	
+	var relative # SwipeGesture with relative points
+	
 	var distance
 	var distance_points
 	
-	func _init():
-		points = []
-		duration = 0
+	func _init(points=[]):
+		self.points = points
+		self.duration = 0
 	
 	func get_distance():
 		if not distance and distance_points != points.size():
@@ -281,10 +458,29 @@ class SwipeGesture:
 
 	func get_points():
 		return points
+	
+	func get_point(index):
+		return points[index]
 		
 	func point_count():
 		return points.size()
-
+	
+	func relative():
+		if not relative:
+			relative = duplicate()
+			relative.points = []
+			for point in get_points():
+				relative.points.append(point - first_point())
+		return relative
+	
+	func scale(scale):
+		var scaled = duplicate()
+		scaled.relative = null
+		scaled.points = []
+		for point in get_points():
+			scaled.points.append(Vector2(point.x * scale.x, point.y * scale.y))
+		return scaled
+		
 # SwipeMath utility class
 
 class SwipeMath:
