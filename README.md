@@ -132,6 +132,7 @@ Methods intended for public usage are:
 - `remove_pattern_detection(name)` - remove a specific trigger pattern.
 - `remove_pattern_detections()` - remove all trigger patterns.
 - `history()` - list of all the gestures detected since component creation.
+- `points_to_gesture(points)` - Build a gesture object from a list of points.
 
 
 ## Class References
@@ -152,4 +153,3 @@ Methods intended for public usage are:
 - `first_point()` - Get the first point of the gesture.
 - `last_point()` - Get the last point of the gesture.
 - `point_count()` - get the point count.
-- `points_to_gesture(points)` - Build a gesture object from a list of points.
