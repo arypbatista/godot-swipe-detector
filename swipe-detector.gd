@@ -481,6 +481,23 @@ class SwipeGesture extends Node: # Extend node to access duplicate function
 			scaled.points.append(Vector2(point.x * scale.x, point.y * scale.y))
 		return scaled
 		
+	func get_direction():
+		var start_point = first_point()
+		var end_point = last_point()
+		var diff_x = end_point.x - start_point.x
+		var diff_y = end_point.y - start_point.y
+
+		if abs(diff_x) > abs(diff_y):
+			if diff_x > 0:
+				return "right"
+			else:
+				return "left"
+		else:
+			if diff_y > 0:
+				return "down"
+			else:
+				return "up"
+		
 # SwipeMath utility class
 
 class SwipeMath:
