@@ -512,11 +512,7 @@ class SwipeGesture extends Node: # Extend node to access duplicate function
 	func get_direction_index():
 		var angle = get_direction_angle() + PI
 		var percentage = angle/(PI*2.0) + 1.0/16
-		var index = int(floor(percentage * 8)) % 8
-		
-		print("Angle: " , angle, ' index: ', index)
-		print("Pecentage: ", percentage)
-		return index
+		return int(floor(percentage * 8)) % 8
 
 	func get_direction():
 		return DIRECTIONS[get_direction_index()]
