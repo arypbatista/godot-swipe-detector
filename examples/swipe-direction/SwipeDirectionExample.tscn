@@ -1,0 +1,136 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://examples/swipe-direction/SwipeDirectionExample.gd" type="Script" id=1]
+[ext_resource path="res://examples/swipe-direction/debug-background.png" type="Texture" id=2]
+[ext_resource path="res://SwipeDetector.tscn" type="PackedScene" id=3]
+[ext_resource path="res://examples/swipe-trail/trail-particle.png" type="Texture" id=4]
+[ext_resource path="res://examples/swipe-direction/trail-particle.png" type="Texture" id=5]
+
+[node name="SwipeSpawnerExample" type="Node2D"]
+
+script/script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/pos = Vector2( 497.507, 281.44 )
+transform/scale = Vector2( 1, 1 )
+texture = ExtResource( 2 )
+
+[node name="SwipeDetector" parent="." instance=ExtResource( 3 )]
+
+process_method = "Idle"
+distance_threshold = 0.01
+
+[node name="Label" type="Label" parent="."]
+
+rect/scale = Vector2( 2, 2 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 10.0
+margin/top = 10.0
+margin/right = 162.0
+margin/bottom = 24.0
+text = "Swipe Direction Example"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Particles2D" type="Particles2D" parent="."]
+
+config/amount = 32
+config/lifetime = 0.2
+config/emitting = false
+config/local_space = false
+config/texture = ExtResource( 4 )
+params/direction = 0.0
+params/spread = 10.0
+params/linear_velocity = 20.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 9.8
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 1.0
+params/final_size = 1.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+
+[node name="DirectionLabel" type="Label" parent="."]
+
+rect/scale = Vector2( 3, 3 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 422.0
+margin/top = 526.0
+margin/right = 475.0
+margin/bottom = 540.0
+text = "<Swipe>"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Sectors" type="Node2D" parent="."]
+
+[node name="Sprite3" type="Sprite" parent="Sectors"]
+
+transform/pos = Vector2( 498.615, 446.91 )
+texture = ExtResource( 5 )
+modulate = Color( 0, 0, 0, 1 )
+
+[node name="Sprite7" type="Sprite" parent="Sectors"]
+
+transform/pos = Vector2( 580.873, 367.79 )
+texture = ExtResource( 5 )
+modulate = Color( 0, 0, 0, 1 )
+
+[node name="Sprite" type="Sprite" parent="Sectors"]
+
+transform/pos = Vector2( 652.632, 280.332 )
+texture = ExtResource( 5 )
+modulate = Color( 0, 0, 0, 1 )
+
+[node name="Sprite4" type="Sprite" parent="Sectors"]
+
+transform/pos = Vector2( 577.19, 192.224 )
+texture = ExtResource( 5 )
+modulate = Color( 0, 0, 0, 1 )
+
+[node name="Sprite2" type="Sprite" parent="Sectors"]
+
+transform/pos = Vector2( 498.615, 118.56 )
+texture = ExtResource( 5 )
+modulate = Color( 0, 0, 0, 1 )
+
+[node name="Sprite5" type="Sprite" parent="Sectors"]
+
+transform/pos = Vector2( 406.535, 192.224 )
+texture = ExtResource( 5 )
+modulate = Color( 0, 0, 0, 1 )
+
+[node name="Sprite1" type="Sprite" parent="Sectors"]
+
+transform/pos = Vector2( 336.842, 280.332 )
+texture = ExtResource( 5 )
+modulate = Color( 0, 0, 0, 1 )
+
+[node name="Sprite6" type="Sprite" parent="Sectors"]
+
+transform/pos = Vector2( 412.673, 361.652 )
+texture = ExtResource( 5 )
+modulate = Color( 0, 0, 0, 1 )
+
+[connection signal="swipe_ended" from="SwipeDetector" to="." method="_on_SwipeDetector_swipe_ended"]
+
+[connection signal="swipe_started" from="SwipeDetector" to="." method="_on_SwipeDetector_swipe_started"]
+
+[connection signal="swipe_updated" from="SwipeDetector" to="." method="_on_SwipeDetector_swipe_updated"]
+
+
