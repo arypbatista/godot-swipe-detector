@@ -1,11 +1,11 @@
 # godot-swipe-detector
-Swipe Detector is a swipe detection script that monitor screen input 
-(mouse/touch) triggering different signals informing swipe progress 
-or swipe finalization. There are a lot of configurations available 
-to indicate detector when to consider a movement to a swipe or to 
-indicate the precision of the detected swipe curve. On swipe end you 
-will obtain a ﻿SwipeGesture﻿ object that holds swipe information such 
-as duration, speed, distance (from initial point), points, Curve2D. 
+Swipe Detector is a swipe detection script that monitor screen input
+(mouse/touch) triggering different signals informing swipe progress
+or swipe finalization. There are a lot of configurations available
+to indicate detector when to consider a movement to a swipe or to
+indicate the precision of the detected swipe curve. On swipe end you
+will obtain a ﻿SwipeGesture﻿ object that holds swipe information such
+as duration, speed, distance (from initial point), points, Curve2D.
 
 It also implements some basic pattern detections, but it is still
 experimental.
@@ -56,7 +56,7 @@ represent pattern points.
 
 For example:
 
-![Square Pattern Tree](https://github.com/arypbatista/godot-swipe-detector/blob/master/docs/square-pattern-tree.png?raw=true) 
+![Square Pattern Tree](https://github.com/arypbatista/godot-swipe-detector/blob/master/docs/square-pattern-tree.png?raw=true)
 ![Square Pattern Render](https://github.com/arypbatista/godot-swipe-detector/blob/master/docs/square-pattern-render.png?raw=true)
 
 When nesting this tree under your `SwipeDetector` node it will be included as a trigger pattern with the same name as the pattern node.
@@ -97,15 +97,15 @@ There are some options available:
 
 - `Detect Gesture`: Indicates whether detector should detect or not swiping.
 - `Process Method`: Indicates the process method to be used (Fixed or Idle).
-- `Distance Threshold`: Indicates which is the minimum distance between two 
+- `Distance Threshold`: Indicates which is the minimum distance between two
 points on the gesture, smaller this number, bigger the point count you will get
 (i.e. more precisse information).
-- `Duration Threshold`: Indicates how long a gesture needs to last to be 
-considered as a gesture. You can calibrate the swipe detector so you don't 
+- `Duration Threshold`: Indicates how long a gesture needs to last to be
+considered as a gesture. You can calibrate the swipe detector so you don't
 accidentally swipe when intended to click.
 - `Limit Duration`: Indicates whether to limit swipe by duration or not.
 - `Maximum Duration`: Indicates the maximum duration for a swipe.
-- `Minimum Points`: Indicates how many points makes a gesture. You may only 
+- `Minimum Points`: Indicates how many points makes a gesture. You may only
 admit complex gestures with more than six points, for example.
 - `Limit Points`: Indicates whether to limit swipe count points or not.
 - `Maximum Points`: Indicates the maximum point count for a swipe.
@@ -124,7 +124,7 @@ admit complex gestures with more than six points, for example.
 - `pattern_detected(pattern_name, actual_gesture)` - Signal triggered when gesture matches predefined pattern.
 
 
-#### Public API Methods
+## Public API Methods & constants
 
 Methods intended for public usage are:
 
@@ -132,7 +132,19 @@ Methods intended for public usage are:
 - `remove_pattern_detection(name)` - remove a specific trigger pattern.
 - `remove_pattern_detections()` - remove all trigger patterns.
 - `history()` - list of all the gestures detected since component creation.
+- `points_to_gesture(points)` - Build a gesture object from a list of points.
 
+Direction constants:
+
+- `DIRECTION_DOWN`
+- `DIRECTION_DOWN_RIGHT`
+- `DIRECTION_RIGHT`
+- `DIRECTION_UP_RIGHT`
+- `DIRECTION_UP`
+- `DIRECTION_UP_LEFT`
+- `DIRECTION_LEFT`
+- `DIRECTION_DOWN_LEFT`
+- `DIRECTIONS` - List of directions ordered.
 
 ## Class References
 
@@ -144,12 +156,14 @@ The `SwipeGesture` class instances store all the information gathered from gestu
 
 Methods intended for public usage are:
 
-- `get_duration()` - Get gesture duration.
-- `get_distance()` - Get the path distance from the first to the last point.
+- `get_duration()` - Returns gesture duration.
+- `get_distance()` - Returns the path distance from the first to the last point.
 - `get_speed()` - Distance divided by duration of swipe.
-- `get_points()` - Obtain the points conforming the gesture.
-- `get_curve()` - Get a Curve2D built from gesture points.
-- `first_point()` - Get the first point of the gesture.
-- `last_point()` - Get the last point of the gesture.
-- `point_count()` - get the point count.
-- `points_to_gesture(points)` - Build a gesture object from a list of points.
+- `get_points()` - Returns the points conforming the gesture.
+- `get_curve()` - Returns a Curve2D built from gesture points.
+- `first_point()` - Returns the first point of the gesture.
+- `last_point()` - Returns the last point of the gesture.
+- `point_count()` - Returns the point count.
+- `get_direction()` - Return a direction string use constants to test this values.
+- `get_direction_vector()` - Returns the direction vector.
+- `get_direction_angle()` - Returns the direction angle.
