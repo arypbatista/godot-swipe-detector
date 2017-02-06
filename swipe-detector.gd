@@ -14,11 +14,11 @@ signal swiped(gesture)
 signal swipe_ended(gesture) # alias for `swiped`
 
 # Signal triggered when swipe started
-signal swipe_started(point)
+signal swipe_started(partial_gesture)
 
 # Signal triggered when gesture is updated
-signal swipe_updated(point)
-signal swipe_updated_with_delta(point, delta)
+signal swipe_updated(partial_gesture)
+signal swipe_updated_with_delta(partial_gesture, delta)
 
 # Signal triggered when swipe failed
 # This means the swipe didn't pass thresholds and requirements
@@ -93,22 +93,41 @@ const DIRECTIONS = [
 	DIRECTION_DOWN_LEFT
 ]
 
-onready var capturing_gesture = false
 onready var gesture_history = []
-var gesture
-var last_update_delta
-onready var was_swiping = false
 var swipe_input
 onready var ready = true
 
 onready var pattern_detections = {}
-
-
+onready var detection_areas = []
+onready var states
 
 func _ready():
+	detection_areas = detect_areas()
+	initialize_states()
 	swipe_input = get_swipe_input()
 	set_swipe_process(process_method, detect_gesture)
 	add_children_as_patterns()
+
+func detect_areas():
+	var areas = []
+	for child in get_children():
+		if child.get_type() == 'Area2D':
+			areas.append(child)
+	return areas
+
+func state(area):
+	if area != null:
+		return states[area.get_name()]
+	else:
+		return states['_singleton']
+
+func initialize_states():
+	states = {}
+	if detection_areas.size() > 0:
+		for area in detection_areas:
+			states[area.get_name()] = DetectionState.new(area.get_name())
+	else:
+		states['_singleton'] = DetectionState.new()
 
 func _input(ev):
 	swipe_input.process_input(ev)
@@ -124,31 +143,37 @@ func get_swipe_input():
 func on_touch_device():
 	return OS.get_name() in ['Android', 'iOS']
 
+func connect_detection_areas():
+	for area in detection_areas:
+		area.connect('input_event', swipe_input, 'process_area_input', [area])
+
 func set_swipe_process(method, value):
 	if swipe_input.has_method('process_input'):
-		set_process_input(true)
-
-	if swipe_input.has_method('process'):
+		if detection_areas.size() > 0:
+			connect_detection_areas()
+		else:
+			set_process_input(value)
+	elif swipe_input.has_method('process'):
 		if method == PROCESS_IDLE:
 			set_process(value)
 		elif method == PROCESS_FIXED:
 			set_fixed_process(value)
 
 func detect(detect=true):
-	if ready:
+	if ready == true:
 		set_swipe_process(process_method, detect)
 		if not detect:
-			clean_state()
+			clean_states()
 	return self
 
-func reached_point_limit():
-	return limit_points and gesture.point_count() >= maximum_points
+func reached_point_limit(area):
+	return limit_points and state(area).gesture.point_count() >= maximum_points
 
-func reached_duration_limit():
-	return limit_duration and gesture.get_duration() >= maximum_duration
+func reached_duration_limit(area):
+	return limit_duration and state(area).gesture.get_duration() >= maximum_duration
 
-func reached_limit():
-	return reached_point_limit() or reached_duration_limit()
+func reached_limit(area):
+	return reached_point_limit(area) or reached_duration_limit(area)
 
 func _fixed_process(delta):
 	swipe_input.process(delta)
@@ -156,51 +181,53 @@ func _fixed_process(delta):
 func _process(delta):
 	swipe_input.process(delta)
 
-func process_swipe(delta):
-	if not capturing_gesture and swiping_started():
-		swipe_start()
-	elif capturing_gesture and swiping() and not reached_limit():
-		swipe_update(delta)
-	elif capturing_gesture and swiping() and reached_limit():
-		swipe_stop(true)
-	elif capturing_gesture and not swiping():
-		swipe_stop()
-	was_swiping = swiping()
+func process_swipe(delta, area=null):
+	var state = state(area)
+	if not state.capturing and swiping_started(area):
+		swipe_start(area)
+	elif state.capturing and swiping(area) and not reached_limit(area):
+		swipe_update(delta, area)
+	elif state.capturing and swiping(area) and reached_limit(area):
+		swipe_stop(area, true)
+	elif state.capturing and not swiping(area):
+		swipe_stop(area)
+	state.was_swiping = swiping(area)
 
 
-func clean_state():
-	gesture = null
-	last_update_delta = null
-	capturing_gesture = false
+func clean_states():
+	initialize_states()
 
 
-func swiping_started():
-	return not was_swiping and swiping()
+func swiping_started(area):
+	return not state(area).was_swiping and swiping(area)
 
-func swiping():
-	return swipe_input.swiping()
-
-
-func swipe_point():
-	return swipe_input.swipe_point()
+func swiping(area):
+	return swipe_input.swiping(area)
 
 
-func swipe_start():
-	var point = swipe_point()
+func swipe_point(area):
+	return swipe_input.swipe_point(area)
+
+
+func swipe_start(area):
+	var state = state(area)
+	var point = swipe_point(area)
 	debug('Swipe started on point ', point)
-	capturing_gesture = true
-	last_update_delta = 0.0
-	gesture = SwipeGesture.new()
-	add_gesture_data(point)
-	emit_signal('swipe_started', point)
+	state.capturing = true
+	state.last_update_delta = 0.0
+	state.gesture = SwipeGesture.new(area)
+	add_gesture_data(area, point)
+	emit_signal('swipe_started', state.gesture)
 	return self
 
 
-func swipe_stop(forced=false):
+func swipe_stop(area, forced=false):
+	var state = state(area)
+	var gesture = state.gesture
 	if gesture.point_count() > minimum_points and gesture.get_duration() > duration_threshold:
 
 		if forced:
-			capturing_gesture = false
+			state.capturing = false
 
 		detect_gestures(gesture)
 		debug('Swipe stopped on point ', gesture.last_point(), ' (forced: ' + str(forced) + ')')
@@ -210,22 +237,25 @@ func swipe_stop(forced=false):
 	else:
 		debug('Swipe stopped on point ', gesture.last_point(), ' (failed)')
 		emit_signal('swipe_failed')
-	clean_state()
+	clean_states()
 	return self
 
 
-func swipe_update(delta):
-	var point = swipe_point()
-	last_update_delta += delta
+func swipe_update(delta, area):
+	var state = state(area)
+	var gesture = state.gesture
+	var point = swipe_point(area)
+	state.last_update_delta += delta
 	if gesture.last_point().distance_to(point) > distance_threshold:
 		debug('Swipe updated with point ', point, ' (delta: ' + str(delta) + ')')
-		add_gesture_data(point, last_update_delta)
-		emit_signal('swipe_updated', point)
-		emit_signal('swipe_updated_with_delta', point, last_update_delta)
-		last_update_delta = 0.0
+		add_gesture_data(area, point, state.last_update_delta)
+		emit_signal('swipe_updated', state.gesture)
+		emit_signal('swipe_updated_with_delta', state.gesture, state.last_update_delta)
+		state.last_update_delta = 0.0
 
 
-func add_gesture_data(point, delta=0):
+func add_gesture_data(area, point, delta=0):
+	var gesture = state(area).gesture
 	gesture.add_point(point)
 	gesture.add_duration(delta)
 	return self
@@ -248,6 +278,24 @@ func points_to_gesture(points):
 	return SwipeGesture.new(points)
 
 
+# State for a detection instance
+
+class DetectionState:
+	
+	var area_name
+	var capturing = false
+	var gesture
+	var last_update_delta
+	var was_swiping
+	
+	func _init(area_name=null):
+		self.area_name = area_name
+		capturing = false
+		gesture   = null
+		last_update_delta = null
+		was_swiping = false
+
+
 # Gesture/Curve detection methods
 
 func add_pattern_detection(name, gesture):
@@ -261,18 +309,19 @@ func remove_pattern_detection(name):
 
 func add_children_as_patterns():
 	for child in get_children():
-		var gesture = SwipeGesture.new()
-		for point in child.get_children():
-			gesture.add_point(point.get_pos())
-		add_pattern_detection(child.get_name(), gesture)
+		if child.get_type() != 'Area2D':
+			var gesture = SwipeGesture.new()
+			for point in child.get_children():
+				gesture.add_point(point.get_pos())
+			add_pattern_detection(child.get_name(), gesture)
 
 func detect_gestures(gesture):
 	var best_match
 	for pattern_name in pattern_detections.keys():
 		var actual_match = match_gestures(gesture, pattern_detections[pattern_name])
-		if actual_match.is_match() and (not best_match or actual_match.better_than(best_match)):
+		if actual_match.is_match() and (best_match == null or actual_match.better_than(best_match)):
 			best_match = actual_match
-	if best_match:
+	if best_match != null:
 		debug('Matched gesture "', best_match.pattern.name, '" with score ', str(best_match.score()))
 		emit_signal('pattern_detected', best_match.pattern.name, gesture)
 
@@ -294,7 +343,7 @@ class GestureMatch:
 		self.pattern = patternGesture
 
 	func score():
-		if not score:
+		if score == null:
 			var relative_pattern = pattern.gesture.relative()
 			var relative_sample  = sample.relative()
 			var sample_scale = scale(relative_pattern, relative_sample)
@@ -419,21 +468,30 @@ class GesturePattern:
 
 class SwipeGesture extends Node: # Extend node to access duplicate function
 	# Stores swipe data
-
+	
+	var area # Area were swipe was performed (null if not using areas)
+	
 	var points # list of points
 	var duration # in seconds
-
+	
 	var relative # SwipeGesture with relative points
-
+	
 	var distance
 	var distance_points
-
-	func _init(points=[]):
+	
+	func _init(area=null, points=[]):
+		self.area = area
 		self.points = points
 		self.duration = 0
-
+	
+	func get_area():
+		return area
+	
+	func is_area_detection():
+		return area != null
+	
 	func get_distance():
-		if not distance and distance_points != points.size():
+		if distance == null and distance_points != points.size():
 			distance = calculate_distance()
 			distance_points = points.size()
 		return distance
@@ -487,7 +545,7 @@ class SwipeGesture extends Node: # Extend node to access duplicate function
 		return points.size()
 
 	func relative():
-		if not relative:
+		if relative == null:
 			relative = duplicate()
 			relative.points = []
 			for point in get_points():
@@ -548,73 +606,96 @@ class SwipeInput:
 
 class EventSwipeInput extends SwipeInput:
 
-	var swiping
-	var point
-	var last_time
-	var delta
+	class InputState:
+
+		var area
+		var swiping
+		var point
+		var last_time
+		var delta
+		
+		func _init(area):
+			self.area = area
+
+
+	var states
 
 	func _init(detector).(detector):
-		self.swiping = false
-		delta = 0.0
+		states = {}
+
+	func area_name(area):
+		if area != null:
+			return area.get_name()
+		else:
+			return '_singleton'
+
+	func state(area):
+		if not states.has(area_name(area)):
+			states[area_name(area)] = InputState.new(area)
+		return states[area_name(area)]
 
 	func event_types():
 		return []
 
-	func process_input(event):
+	func process_area_input(viewport, event, shape_id, area):
+		process_input(event, area)
+
+	func process_input(event, area=null):
+		var state = state(area)
 		if event.type in self.event_types():
-			if not last_time:
-				delta = 0.0
+			if state.last_time == null:
+				state.delta = 0.0
 			else:
-				delta = (OS.get_ticks_msec() - last_time) / 1000.0
+				state.delta = (OS.get_ticks_msec() - state.last_time) / 1000.0
 
-			process_event(event, delta)
-			last_time = OS.get_ticks_msec()
+			process_event(event, state.delta, state)
+			state.last_time = OS.get_ticks_msec()
 
-	func process_event(event, delta):
+	func process_event(event, delta, state):
 		pass
 
-	func swiping():
-		return swiping
+	func swiping(area):
+		return state(area).swiping
 
-	func swipe_point():
-		return point
+	func swipe_point(area):
+		return state(area).point
 
+class PointerLikeSwipeEvent extends EventSwipeInput:
 
-class MouseSwipeInput extends EventSwipeInput:
-
-	func _init(detector).(detector):
-		pass
-
+	var press_event
+	var motion_event
+	
+	func _init(detector, press_event, motion_event).(detector):
+		self.press_event = press_event
+		self.motion_event = motion_event
+	
 	func event_types():
-		return [InputEvent.MOUSE_BUTTON, InputEvent.MOUSE_MOTION]
+		return [press_event, motion_event]
+	
+	func extract_pos(event):
+		return event.pos
+	
+	func process_event(event, delta, state):
+		if event.type == press_event:
+			if event.is_pressed():
+				state.swiping = true
+			else:
+				state.swiping = false
+				detector.process_swipe(delta, state.area)
 
-	func process_event(event, delta):
-		if event.type == InputEvent.MOUSE_BUTTON and event.is_pressed():
-			self.swiping = true
+		state.point = extract_pos(event)
+		
+		detector.process_swipe(delta, state.area)
+				
+	
 
-		self.point = event.pos
-		detector.process_swipe(delta)
+class MouseSwipeInput extends PointerLikeSwipeEvent:
 
-		if event.type == InputEvent.MOUSE_BUTTON and not event.is_pressed():
-			self.swiping = false
-			detector.process_swipe(delta)
-
-
-class TouchSwipeInput extends EventSwipeInput:
-
-	func _init(detector).(detector):
+	func _init(detector).(detector, InputEvent.MOUSE_BUTTON, InputEvent.MOUSE_MOTION):
 		pass
 
-	func event_types():
-		return [InputEvent.SCREEN_TOUCH, InputEvent.SCREEN_DRAG]
 
-	func process_event(event, delta):
-		if event.type == InputEvent.SCREEN_TOUCH and event.is_pressed():
-			self.swiping = true
+class TouchSwipeInput extends PointerLikeSwipeEvent:
 
-		self.point = event.pos
-		detector.process_swipe(delta)
-
-		if event.type == InputEvent.SCREEN_TOUCH and not event.is_pressed():
-			self.swiping = false
-			detector.process_swipe(delta)
+	func _init(detector).(detector, InputEvent.SCREEN_TOUCH, InputEvent.SCREEN_DRAG):
+		pass

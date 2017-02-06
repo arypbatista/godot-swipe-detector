@@ -117,9 +117,9 @@ admit complex gestures with more than six points, for example.
 
 - `swiped(gesture)` - Signal triggered when swipe captured.
 - `swipe_ended(gesture)` - Alias for `swiped(gesture)`.
-- `swipe_started(point)` - Signal triggered when swipe started.
-- `swipe_updated(point)` - Signal triggered when gesture is updated.
-- `swipe_updated_with_delta(point, delta)` - Signal triggered when gesture is updated. `delta` parameter indicates time delta from last update.
+- `swipe_started(partial_gesture)` - Signal triggered when swipe started.
+- `swipe_updated(partial_gesture)` - Signal triggered when gesture is updated.
+- `swipe_updated_with_delta(partial_gesture, delta)` - Signal triggered when gesture is updated. `delta` parameter indicates time delta from last update.
 - `swipe_failed()` - Signal triggered when swipe failed. This means the swipe didn't pass thresholds and requirements to be detected as swipe.
 - `pattern_detected(pattern_name, actual_gesture)` - Signal triggered when gesture matches predefined pattern.
 
@@ -156,6 +156,8 @@ The `SwipeGesture` class instances store all the information gathered from gestu
 
 Methods intended for public usage are:
 
+- `get_area()` - Returns the area were gesture was originated. `null` if not
+                 using detection areas.
 - `get_duration()` - Returns gesture duration.
 - `get_distance()` - Returns the path distance from the first to the last point.
 - `get_speed()` - Distance divided by duration of swipe.

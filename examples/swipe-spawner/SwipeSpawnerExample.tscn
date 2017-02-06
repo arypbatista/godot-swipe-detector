@@ -12,7 +12,6 @@ script/script = ExtResource( 1 )
 process_method = "Idle"
 distance_threshold = 20.0
 duration_threshold = 0.02
-debug_mode = false
 
 [node name="Points" type="Node2D" parent="."]
 

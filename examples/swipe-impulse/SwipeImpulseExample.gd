@@ -9,7 +9,8 @@ func get_object(point):
 			selected = o
 	return selected
 
-func _on_SwipeDetector_swipe_started( point ):
+func _on_SwipeDetector_swipe_started( partial_gesture ):
+	var point = partial_gesture.last_point()
 	sliding_object = get_object(point)
 	if sliding_object:
 		print('We have a sliding object on: ', sliding_object.get_pos())

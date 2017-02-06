@@ -2,13 +2,12 @@
 
 [sub_resource type="GDScript" id=1]
 
-script/source = "extends Container\n\n\nvar options\n\nfunc _ready():\n\toptions = get_node(\'PanelContainer/HBoxContainer/VBoxContainer/OptionButton\')\n\toptions.add_item(\'swipe-spawner/SwipeSpawner\')\n\toptions.add_item(\'swipe-spawner/PointLimitedSwipeSpawner\')\n\toptions.add_item(\'swipe-spawner/DurationLimitedSwipeSpawner\')\n\toptions.add_item(\'swipe-impulse/SwipeImpulse\')\n\toptions.add_item(\'swipe-impulse/SwipeSmoothImpulse\')\n\toptions.add_item(\'swipe-impulse/SwipeTouchSmoothImpulse\')\n\toptions.add_item(\'swipe-signals/SwipeSignals\')\n\toptions.add_item(\'swipe-trail/SwipeTrail\')\n\toptions.add_item(\'swipe-direction/SwipeDirection\')\n\toptions.add_item(\'gesture-detection/GestureDetection\')\n\toptions.add_item(\'gesture-detection/GestureDetectionWithPatterns\')\n\nfunc launch():\n\tvar selected_example = 0\n\tif options.get_selected() > 0:\n\t\tselected_example = options.get_selected()\n\t\t\n\tprint(\'Selected example \', selected_example)\n\tload_example(options.get_item_text(selected_example))\n\nfunc load_example(example):\n\tprint(\'Loading example \', example)\n\tget_tree().change_scene(\'res://examples/\' + example + \'Example.tscn\')\n"
+script/source = "extends Container\n\n\nvar options\n\nfunc _ready():\n\toptions = get_node(\'PanelContainer/HBoxContainer/VBoxContainer/OptionButton\')\n\toptions.add_item(\'swipe-spawner/SwipeSpawner\')\n\toptions.add_item(\'swipe-spawner/PointLimitedSwipeSpawner\')\n\toptions.add_item(\'swipe-spawner/DurationLimitedSwipeSpawner\')\n\toptions.add_item(\'swipe-impulse/SwipeImpulse\')\n\toptions.add_item(\'swipe-impulse/SwipeSmoothImpulse\')\n\toptions.add_item(\'swipe-impulse/SwipeTouchSmoothImpulse\')\n\toptions.add_item(\'swipe-signals/SwipeSignals\')\n\toptions.add_item(\'swipe-trail/SwipeTrail\')\n\toptions.add_item(\'swipe-areas/SwipeAreas\')\n\toptions.add_item(\'swipe-direction/SwipeDirection\')\n\toptions.add_item(\'gesture-detection/GestureDetection\')\n\toptions.add_item(\'gesture-detection/GestureDetectionWithPatterns\')\n\nfunc launch():\n\tvar selected_example = 0\n\tif options.get_selected() > 0:\n\t\tselected_example = options.get_selected()\n\t\t\n\tprint(\'Selected example \', selected_example)\n\tload_example(options.get_item_text(selected_example))\n\nfunc load_example(example):\n\tprint(\'Loading example \', example)\n\tget_tree().change_scene(\'res://examples/\' + example + \'Example.tscn\')\n"
 
 [node name="Examples" type="Container"]
 
 anchor/right = 1
 anchor/bottom = 1
-rect/scale = Vector2( 2, 2 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -21,16 +20,18 @@ script/script = SubResource( 1 )
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 
+editor/display_folded = true
 anchor/right = 1
 anchor/bottom = 1
+rect/scale = Vector2( 2, 2 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 0
 size_flags/vertical = 0
-margin/left = 100.0
-margin/top = 100.0
-margin/right = 100.0
-margin/bottom = 100.0
+margin/left = 209.0
+margin/top = 184.0
+margin/right = -9.0
+margin/bottom = 8.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
 
