@@ -14,11 +14,11 @@ signal swiped(gesture)
 signal swipe_ended(gesture) # alias for `swiped`
 
 # Signal triggered when swipe started
-signal swipe_started(point)
+signal swipe_started(partial_gesture)
 
 # Signal triggered when gesture is updated
-signal swipe_updated(point)
-signal swipe_updated_with_delta(point, delta)
+signal swipe_updated(partial_gesture)
+signal swipe_updated_with_delta(partial_gesture, delta)
 
 # Signal triggered when swipe failed
 # This means the swipe didn't pass thresholds and requirements
