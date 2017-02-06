@@ -1,21 +1,22 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=8 format=1]
 
-[ext_resource path="res://examples/gesture-detection/GestureDetectionWithPatternsExample.gd" type="Script" id=1]
-[ext_resource path="res://addons/swipe-detector/swipe_detector.gd" type="Script" id=2]
-[ext_resource path="res://addons/swipe-detector/icon.png" type="Texture" id=3]
-[ext_resource path="res://examples/gesture-detection/TrailGhost.tscn" type="PackedScene" id=4]
-[ext_resource path="res://examples/gesture-detection/trail-particle.png" type="Texture" id=5]
-[ext_resource path="res://examples/gesture-detection/direction.png" type="Texture" id=6]
+[ext_resource path="res://examples/example.tscn" type="PackedScene" id=1]
+[ext_resource path="res://examples/gesture-detection/gesture_detection_with_patterns_example.gd" type="Script" id=2]
+[ext_resource path="res://addons/swipe-detector/swipe_detector.gd" type="Script" id=3]
+[ext_resource path="res://addons/swipe-detector/icon.png" type="Texture" id=4]
+[ext_resource path="res://examples/gesture-detection/trail_ghost.tscn" type="PackedScene" id=5]
+[ext_resource path="res://examples/gesture-detection/trail-particle.png" type="Texture" id=6]
+[ext_resource path="res://examples/gesture-detection/direction.png" type="Texture" id=7]
 
-[node name="GestureDetectionExample" type="Node2D"]
+[node name="GestureDetectionWithPatternsExample" instance=ExtResource( 1 )]
 
-script/script = ExtResource( 1 )
+script/script = ExtResource( 2 )
 
 [node name="SwipeDetector" type="Node" parent="."]
 
 editor/display_folded = true
-script/script = ExtResource( 2 )
-__meta__ = { "_editor_icon":ExtResource( 3 ) }
+script/script = ExtResource( 3 )
+__meta__ = { "_editor_icon":ExtResource( 4 ) }
 detect_gesture = true
 process_method = null
 distance_threshold = 80.0
@@ -33,42 +34,42 @@ debug_mode = false
 editor/display_folded = true
 transform/pos = Vector2( -253.233, 91.9477 )
 
-[node name="TrailGhost" parent="SwipeDetector/Circle" instance=ExtResource( 4 )]
+[node name="TrailGhost" parent="SwipeDetector/Circle" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 687.957, 185.192 )
 modulate = Color( 0, 0.0859375, 1, 1 )
 
-[node name="TrailGhost1" parent="SwipeDetector/Circle" instance=ExtResource( 4 )]
+[node name="TrailGhost1" parent="SwipeDetector/Circle" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 647.259, 111.332 )
 modulate = Color( 0, 0.0859375, 1, 1 )
 
-[node name="TrailGhost2" parent="SwipeDetector/Circle" instance=ExtResource( 4 )]
+[node name="TrailGhost2" parent="SwipeDetector/Circle" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 648.766, 26.9211 )
 modulate = Color( 0, 0.0859375, 1, 1 )
 
-[node name="TrailGhost3" parent="SwipeDetector/Circle" instance=ExtResource( 4 )]
+[node name="TrailGhost3" parent="SwipeDetector/Circle" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 731.67, -13.7771 )
 modulate = Color( 0, 0.0859375, 1, 1 )
 
-[node name="TrailGhost4" parent="SwipeDetector/Circle" instance=ExtResource( 4 )]
+[node name="TrailGhost4" parent="SwipeDetector/Circle" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 816.081, -0.21106 )
 modulate = Color( 0, 0.0859375, 1, 1 )
 
-[node name="TrailGhost5" parent="SwipeDetector/Circle" instance=ExtResource( 4 )]
+[node name="TrailGhost5" parent="SwipeDetector/Circle" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 843.213, 67.6192 )
 modulate = Color( 0, 0.0859375, 1, 1 )
 
-[node name="TrailGhost6" parent="SwipeDetector/Circle" instance=ExtResource( 4 )]
+[node name="TrailGhost6" parent="SwipeDetector/Circle" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 841.706, 147.508 )
 modulate = Color( 0, 0.0859375, 1, 1 )
 
-[node name="TrailGhost7" parent="SwipeDetector/Circle" instance=ExtResource( 4 )]
+[node name="TrailGhost7" parent="SwipeDetector/Circle" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 773.876, 191.221 )
 modulate = Color( 0, 0.0859375, 1, 1 )
@@ -77,42 +78,42 @@ modulate = Color( 0, 0.0859375, 1, 1 )
 
 transform/pos = Vector2( 28.6394, 39.1909 )
 
-[node name="Point1" parent="SwipeDetector/Square" instance=ExtResource( 4 )]
+[node name="Point1" parent="SwipeDetector/Square" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 644.244, 305.779 )
 modulate = Color( 0, 1, 0.179688, 1 )
 
-[node name="Point2" parent="SwipeDetector/Square" instance=ExtResource( 4 )]
+[node name="Point2" parent="SwipeDetector/Square" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 757.295, 304.272 )
 modulate = Color( 0, 1, 0.179688, 1 )
 
-[node name="Point3" parent="SwipeDetector/Square" instance=ExtResource( 4 )]
+[node name="Point3" parent="SwipeDetector/Square" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 850.75, 302.764 )
 modulate = Color( 0, 1, 0.179688, 1 )
 
-[node name="Point4" parent="SwipeDetector/Square" instance=ExtResource( 4 )]
+[node name="Point4" parent="SwipeDetector/Square" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 855.272, 391.697 )
 modulate = Color( 0, 1, 0.179688, 1 )
 
-[node name="Point5" parent="SwipeDetector/Square" instance=ExtResource( 4 )]
+[node name="Point5" parent="SwipeDetector/Square" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 859.794, 476.108 )
 modulate = Color( 0, 1, 0.179688, 1 )
 
-[node name="Point6" parent="SwipeDetector/Square" instance=ExtResource( 4 )]
+[node name="Point6" parent="SwipeDetector/Square" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 755.788, 483.645 )
 modulate = Color( 0, 1, 0.179688, 1 )
 
-[node name="Point7" parent="SwipeDetector/Square" instance=ExtResource( 4 )]
+[node name="Point7" parent="SwipeDetector/Square" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 647.259, 488.167 )
 modulate = Color( 0, 1, 0.179688, 1 )
 
-[node name="Point8" parent="SwipeDetector/Square" instance=ExtResource( 4 )]
+[node name="Point8" parent="SwipeDetector/Square" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 647.259, 400.741 )
 modulate = Color( 0, 1, 0.179688, 1 )
@@ -122,61 +123,45 @@ modulate = Color( 0, 1, 0.179688, 1 )
 editor/display_folded = true
 transform/pos = Vector2( -132.646, 43.7128 )
 
-[node name="TrailGhost16" parent="SwipeDetector/ZigZag" instance=ExtResource( 4 )]
+[node name="TrailGhost16" parent="SwipeDetector/ZigZag" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 216.16, 441.439 )
 modulate = Color( 0, 1, 0.929688, 1 )
 
-[node name="TrailGhost17" parent="SwipeDetector/ZigZag" instance=ExtResource( 4 )]
+[node name="TrailGhost17" parent="SwipeDetector/ZigZag" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 220.682, 349.492 )
 modulate = Color( 0, 1, 0.929688, 1 )
 
-[node name="TrailGhost18" parent="SwipeDetector/ZigZag" instance=ExtResource( 4 )]
+[node name="TrailGhost18" parent="SwipeDetector/ZigZag" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 256.858, 257.544 )
 modulate = Color( 0, 1, 0.929688, 1 )
 
-[node name="TrailGhost19" parent="SwipeDetector/ZigZag" instance=ExtResource( 4 )]
+[node name="TrailGhost19" parent="SwipeDetector/ZigZag" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 308.108, 323.867 )
 modulate = Color( 0, 1, 0.929688, 1 )
 
-[node name="TrailGhost20" parent="SwipeDetector/ZigZag" instance=ExtResource( 4 )]
+[node name="TrailGhost20" parent="SwipeDetector/ZigZag" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 353.328, 405.263 )
 modulate = Color( 0, 1, 0.929688, 1 )
 
-[node name="TrailGhost21" parent="SwipeDetector/ZigZag" instance=ExtResource( 4 )]
+[node name="TrailGhost21" parent="SwipeDetector/ZigZag" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 401.563, 488.167 )
 modulate = Color( 0, 1, 0.929688, 1 )
 
-[node name="TrailGhost22" parent="SwipeDetector/ZigZag" instance=ExtResource( 4 )]
+[node name="TrailGhost22" parent="SwipeDetector/ZigZag" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 443.768, 406.771 )
 modulate = Color( 0, 1, 0.929688, 1 )
 
-[node name="TrailGhost23" parent="SwipeDetector/ZigZag" instance=ExtResource( 4 )]
+[node name="TrailGhost23" parent="SwipeDetector/ZigZag" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 466.378, 326.882 )
 modulate = Color( 0, 1, 0.929688, 1 )
-
-[node name="ExampleLabel 2" type="Label" parent="."]
-
-rect/scale = Vector2( 2, 2 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 18.0
-margin/top = 16.0
-margin/right = 101.0
-margin/bottom = 30.0
-text = "Gesture Detection With Patterns Example"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 [node name="Trail" type="Particles2D" parent="."]
 
@@ -185,7 +170,7 @@ config/amount = 32
 config/lifetime = 0.2
 config/emitting = false
 config/local_space = false
-config/texture = ExtResource( 5 )
+config/texture = ExtResource( 6 )
 params/direction = 0.0
 params/spread = 10.0
 params/linear_velocity = 0.0
@@ -253,63 +238,63 @@ max_lines_visible = -1
 
 transform/pos = Vector2( 779.294, 388.894 )
 transform/scale = Vector2( 3, 3 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="Sprite3" type="Sprite" parent="."]
 
 transform/pos = Vector2( 428.084, 197.461 )
 transform/rot = 102.606
 transform/scale = Vector2( 3, 3 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="Sprite4" type="Sprite" parent="."]
 
 transform/pos = Vector2( 464.261, 123.602 )
 transform/rot = 16.1663
 transform/scale = Vector2( 3, 3 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="Sprite8" type="Sprite" parent="."]
 
 transform/pos = Vector2( 544.15, 149.227 )
 transform/rot = -69.0163
 transform/scale = Vector2( 3, 3 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="Sprite5" type="Sprite" parent="."]
 
 transform/pos = Vector2( 126.617, 473.305 )
 transform/rot = 80.7155
 transform/scale = Vector2( 3, 3 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="Sprite6" type="Sprite" parent="."]
 
 transform/pos = Vector2( 307.497, 548.672 )
 transform/rot = 63.8563
 transform/scale = Vector2( 3, 3 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="Sprite7" type="Sprite" parent="."]
 
 transform/pos = Vector2( 189.925, 514.003 )
 transform/rot = -72.698
 transform/scale = Vector2( 3, 3 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="Sprite1" type="Sprite" parent="."]
 
 transform/pos = Vector2( 835.066, 437.128 )
 transform/rot = -86.6397
 transform/scale = Vector2( 3, 3 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="Sprite2" type="Sprite" parent="."]
 
 transform/pos = Vector2( 785.324, 477.827 )
 transform/rot = -182.103
 transform/scale = Vector2( 3, 3 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [connection signal="pattern_detected" from="SwipeDetector" to="." method="_on_SwipeDetector_pattern_detected"]
 

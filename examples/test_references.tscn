@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=1]
 
-[ext_resource path="res://examples/TestReference.png" type="Texture" id=1]
+[ext_resource path="res://examples/test_reference.png" type="Texture" id=1]
 
 [node name="TestReferences" type="Node2D"]
 
@@ -13,5 +13,3 @@ texture = ExtResource( 1 )
 
 transform/pos = Vector2( 280, 310 )
 texture = ExtResource( 1 )
-
-

@@ -1,6 +1,6 @@
 extends Node2D
 
-const Point = preload('./Point.tscn')
+const Point = preload('point.tscn')
 
 export var point_scale_step = 0.1
 export var max_scale = 5.0

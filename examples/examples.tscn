@@ -2,7 +2,7 @@
 
 [sub_resource type="GDScript" id=1]
 
-script/source = "extends Container\n\n\nvar options\n\nfunc _ready():\n\toptions = get_node(\'PanelContainer/HBoxContainer/VBoxContainer/OptionButton\')\n\toptions.add_item(\'swipe-spawner/SwipeSpawner\')\n\toptions.add_item(\'swipe-spawner/PointLimitedSwipeSpawner\')\n\toptions.add_item(\'swipe-spawner/DurationLimitedSwipeSpawner\')\n\toptions.add_item(\'swipe-impulse/SwipeImpulse\')\n\toptions.add_item(\'swipe-impulse/SwipeSmoothImpulse\')\n\toptions.add_item(\'swipe-impulse/SwipeTouchSmoothImpulse\')\n\toptions.add_item(\'swipe-signals/SwipeSignals\')\n\toptions.add_item(\'swipe-trail/SwipeTrail\')\n\toptions.add_item(\'swipe-areas/SwipeAreas\')\n\toptions.add_item(\'swipe-direction/SwipeDirection\')\n\toptions.add_item(\'gesture-detection/GestureDetection\')\n\toptions.add_item(\'gesture-detection/GestureDetectionWithPatterns\')\n\nfunc launch():\n\tvar selected_example = 0\n\tif options.get_selected() > 0:\n\t\tselected_example = options.get_selected()\n\t\t\n\tprint(\'Selected example \', selected_example)\n\tload_example(options.get_item_text(selected_example))\n\nfunc load_example(example):\n\tprint(\'Loading example \', example)\n\tget_tree().change_scene(\'res://examples/\' + example + \'Example.tscn\')\n"
+script/source = "extends Container\n\n\nonready var dropdown = get_node(\'PanelContainer/HBoxContainer/VBoxContainer/OptionButton\')\nvar options\n\nfunc load_options():\n\toptions  = []\n\toptions.append(\'swipe-spawner/swipe_spawner\')\n\toptions.append(\'swipe-spawner/point_limited_swipe_spawner\')\n\toptions.append(\'swipe-spawner/duration_limited_swipe_spawner\')\n\toptions.append(\'swipe-impulse/swipe_impulse\')\n\toptions.append(\'swipe-impulse/swipe_smooth_impulse\')\n\toptions.append(\'swipe-impulse/swipe_touch_smooth_impulse\')\n\toptions.append(\'swipe-signals/swipe_signals\')\n\toptions.append(\'swipe-trail/swipe_trail\')\n\toptions.append(\'swipe-areas/swipe_areas\')\n\toptions.append(\'swipe-direction/swipe_direction\')\n\toptions.append(\'gesture-detection/gesture_detection\')\n\toptions.append(\'gesture-detection/gesture_detection_with_patterns\')\n\nfunc populate_dropdown():\n\tfor option in options:\n\t\tdropdown.add_item(option.split(\'/\')[1])\n\nfunc _ready():\n\tload_options()\n\tpopulate_dropdown()\n\nfunc launch():\n\tvar selected_example = 0\n\tif dropdown.get_selected() > 0:\n\t\tselected_example = dropdown.get_selected()\n\t\t\n\tprint(\'Selected example \', selected_example)\n\tload_example(options[selected_example])\n\nfunc load_example(example):\n\tprint(\'Loading example \', example)\n\tget_tree().change_scene(\'res://examples/\' + example + \'_example.tscn\')\n"
 
 [node name="Examples" type="Container"]
 
@@ -20,7 +20,6 @@ script/script = SubResource( 1 )
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 
-editor/display_folded = true
 anchor/right = 1
 anchor/bottom = 1
 rect/scale = Vector2( 2, 2 )

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=1]
 
-[ext_resource path="res://examples/swipe-impulse/Point.gd" type="Script" id=1]
+[ext_resource path="res://examples/swipe-impulse/point.gd" type="Script" id=1]
 [ext_resource path="res://examples/swipe-spawner/point.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -51,5 +51,3 @@ _update_shape_index = 0
 shape = SubResource( 1 )
 trigger = true
 _update_shape_index = 1
-
-

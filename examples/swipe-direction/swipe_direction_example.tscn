@@ -1,25 +1,26 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=8 format=1]
 
-[ext_resource path="res://examples/swipe-direction/SwipeDirectionExample.gd" type="Script" id=1]
-[ext_resource path="res://examples/swipe-direction/debug-background.png" type="Texture" id=2]
-[ext_resource path="res://addons/swipe-detector/swipe_detector.gd" type="Script" id=3]
-[ext_resource path="res://addons/swipe-detector/icon.png" type="Texture" id=4]
-[ext_resource path="res://examples/swipe-trail/trail-particle.png" type="Texture" id=5]
-[ext_resource path="res://examples/swipe-direction/trail-particle.png" type="Texture" id=6]
+[ext_resource path="res://examples/example.tscn" type="PackedScene" id=1]
+[ext_resource path="res://examples/swipe-direction/swipe_direction_example.gd" type="Script" id=2]
+[ext_resource path="res://examples/swipe-direction/debug-background.png" type="Texture" id=3]
+[ext_resource path="res://addons/swipe-detector/swipe_detector.gd" type="Script" id=4]
+[ext_resource path="res://addons/swipe-detector/icon.png" type="Texture" id=5]
+[ext_resource path="res://examples/swipe-trail/trail-particle.png" type="Texture" id=6]
+[ext_resource path="res://examples/swipe-direction/trail-particle.png" type="Texture" id=7]
 
-[node name="SwipeSpawnerExample" type="Node2D"]
+[node name="SwipeSpawnerExample" instance=ExtResource( 1 )]
 
-script/script = ExtResource( 1 )
+script/script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 
 transform/pos = Vector2( 497.507, 281.44 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="SwipeDetector" type="Node" parent="."]
 
-script/script = ExtResource( 3 )
-__meta__ = { "_editor_icon":ExtResource( 4 ) }
+script/script = ExtResource( 4 )
+__meta__ = { "_editor_icon":ExtResource( 5 ) }
 detect_gesture = true
 process_method = "Idle"
 distance_threshold = 0.01
@@ -32,29 +33,13 @@ maximum_points = -1
 pattern_detection_score_threshold = 80
 debug_mode = false
 
-[node name="Label" type="Label" parent="."]
-
-rect/scale = Vector2( 2, 2 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 10.0
-margin/top = 10.0
-margin/right = 162.0
-margin/bottom = 24.0
-text = "Swipe Direction Example"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
 [node name="Particles2D" type="Particles2D" parent="."]
 
 config/amount = 32
 config/lifetime = 0.2
 config/emitting = false
 config/local_space = false
-config/texture = ExtResource( 5 )
+config/texture = ExtResource( 6 )
 params/direction = 0.0
 params/spread = 10.0
 params/linear_velocity = 20.0
@@ -93,49 +78,49 @@ max_lines_visible = -1
 [node name="Sprite3" type="Sprite" parent="Sectors"]
 
 transform/pos = Vector2( 498.615, 446.91 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 modulate = Color( 0, 0, 0, 1 )
 
 [node name="Sprite7" type="Sprite" parent="Sectors"]
 
 transform/pos = Vector2( 580.873, 367.79 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 modulate = Color( 0, 0, 0, 1 )
 
 [node name="Sprite" type="Sprite" parent="Sectors"]
 
 transform/pos = Vector2( 652.632, 280.332 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 modulate = Color( 0, 0, 0, 1 )
 
 [node name="Sprite4" type="Sprite" parent="Sectors"]
 
 transform/pos = Vector2( 577.19, 192.224 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 modulate = Color( 0, 0, 0, 1 )
 
 [node name="Sprite2" type="Sprite" parent="Sectors"]
 
 transform/pos = Vector2( 498.615, 118.56 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 modulate = Color( 0, 0, 0, 1 )
 
 [node name="Sprite5" type="Sprite" parent="Sectors"]
 
 transform/pos = Vector2( 406.535, 192.224 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 modulate = Color( 0, 0, 0, 1 )
 
 [node name="Sprite1" type="Sprite" parent="Sectors"]
 
 transform/pos = Vector2( 336.842, 280.332 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 modulate = Color( 0, 0, 0, 1 )
 
 [node name="Sprite6" type="Sprite" parent="Sectors"]
 
 transform/pos = Vector2( 412.673, 361.652 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 modulate = Color( 0, 0, 0, 1 )
 
 [connection signal="swipe_ended" from="SwipeDetector" to="." method="_on_SwipeDetector_swipe_ended"]

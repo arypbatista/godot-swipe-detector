@@ -1,5 +1,5 @@
 
-const TrailGhost = preload('./TrailGhost.tscn')
+const TrailGhost = preload('trail_ghost.tscn')
 
 var recording = false
 
