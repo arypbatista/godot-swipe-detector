@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Label\n\nfunc _ready():\n\tset_text(get_parent().get_name())"
+
+[sub_resource type="GDScript" id=2]
+
+script/source = "\n\nfunc _on_BackButton_pressed():\n\tget_tree().change_scene(\'res://examples/examples.tscn\')\n"
+
+[node name="Example" type="Node2D"]
+
+[node name="ExampleName" type="Label" parent="."]
+
+rect/scale = Vector2( 2, 2 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 20.0
+margin/top = 19.0
+margin/right = 132.0
+margin/bottom = 33.0
+text = "<Example Name>"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+script/script = SubResource( 1 )
+
+[node name="BackButton" type="Button" parent="."]
+
+rect/scale = Vector2( 3, 3 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 896.0
+margin/top = 4.0
+margin/right = 916.0
+margin/bottom = 24.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "X"
+flat = true
+script/script = SubResource( 2 )
+
+[connection signal="pressed" from="BackButton" to="BackButton" method="_on_BackButton_pressed"]
+
+

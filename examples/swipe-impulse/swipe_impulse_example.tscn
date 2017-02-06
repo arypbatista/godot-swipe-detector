@@ -1,0 +1,118 @@
+[gd_scene load_steps=8 format=1]
+
+[ext_resource path="res://examples/example.tscn" type="PackedScene" id=1]
+[ext_resource path="res://examples/swipe-impulse/swipe_impulse_example.gd" type="Script" id=2]
+[ext_resource path="res://examples/swipe-impulse/point.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/swipe-detector/swipe_detector.gd" type="Script" id=4]
+[ext_resource path="res://addons/swipe-detector/icon.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 298.163 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 517.212, 9.47275 )
+
+[node name="SwipeImpulseExample" instance=ExtResource( 1 )]
+
+script/script = ExtResource( 2 )
+
+[node name="Points" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="Point" parent="Points" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 334.037, 230.485 )
+
+[node name="Point1" parent="Points" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 484.353, 330.696 )
+
+[node name="Point2" parent="Points" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 673.083, 193.741 )
+
+[node name="Point3" parent="Points" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 704.817, 489.364 )
+
+[node name="Point4" parent="Points" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 260.548, 462.641 )
+
+[node name="Bounds" type="StaticBody2D" parent="."]
+
+editor/display_folded = true
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -11.3615, 302.303 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 1 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 1033.13, 302.303 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 2 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 513.074, -9.11526 )
+shapes/2/trigger = false
+shapes/3/shape = SubResource( 2 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, 517.226, 610.986 )
+shapes/3/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="VerticalBound" type="CollisionShape2D" parent="Bounds"]
+
+transform/pos = Vector2( -11.3615, 302.303 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="VerticalBound1" type="CollisionShape2D" parent="Bounds"]
+
+transform/pos = Vector2( 1033.13, 302.303 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 1
+
+[node name="HorizontalBound" type="CollisionShape2D" parent="Bounds"]
+
+transform/pos = Vector2( 513.074, -9.11526 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 2
+
+[node name="HorizontalBound1" type="CollisionShape2D" parent="Bounds"]
+
+transform/pos = Vector2( 517.226, 610.986 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 3
+
+[node name="SwipeDetector" type="Node" parent="."]
+
+script/script = ExtResource( 4 )
+__meta__ = { "_editor_icon":ExtResource( 5 ) }
+detect_gesture = true
+process_method = null
+distance_threshold = 25.0
+duration_threshold = 0.05
+limit_duration = false
+maximum_duration = -1.0
+minimum_points = 2
+limit_points = false
+maximum_points = -1
+pattern_detection_score_threshold = 80
+debug_mode = false
+
+[connection signal="swipe_ended" from="SwipeDetector" to="." method="_on_SwipeDetector_swipe_ended"]
+
+[connection signal="swipe_started" from="SwipeDetector" to="." method="_on_SwipeDetector_swipe_started"]
+
+

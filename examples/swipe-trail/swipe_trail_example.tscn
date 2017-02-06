@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://examples/example.tscn" type="PackedScene" id=1]
+[ext_resource path="res://examples/swipe-trail/swipe_trail_example.gd" type="Script" id=2]
+[ext_resource path="res://addons/swipe-detector/swipe_detector.gd" type="Script" id=3]
+[ext_resource path="res://addons/swipe-detector/icon.png" type="Texture" id=4]
+[ext_resource path="res://examples/swipe-trail/trail-particle.png" type="Texture" id=5]
+
+[node name="SwipeTrailExample" instance=ExtResource( 1 )]
+
+script/script = ExtResource( 2 )
+
+[node name="SwipeDetector" type="Node" parent="."]
+
+script/script = ExtResource( 3 )
+__meta__ = { "_editor_icon":ExtResource( 4 ) }
+detect_gesture = true
+process_method = "Idle"
+distance_threshold = 0.01
+duration_threshold = 0.05
+limit_duration = false
+maximum_duration = -1.0
+minimum_points = 2
+limit_points = false
+maximum_points = -1
+pattern_detection_score_threshold = 80
+debug_mode = false
+
+[node name="Particles2D" type="Particles2D" parent="."]
+
+config/amount = 32
+config/lifetime = 0.2
+config/emitting = false
+config/local_space = false
+config/texture = ExtResource( 5 )
+params/direction = 0.0
+params/spread = 10.0
+params/linear_velocity = 20.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 9.8
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 1.0
+params/final_size = 1.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+
+[connection signal="swipe_ended" from="SwipeDetector" to="." method="_on_SwipeDetector_swipe_ended"]
+
+[connection signal="swipe_started" from="SwipeDetector" to="." method="_on_SwipeDetector_swipe_started"]
+
+[connection signal="swipe_updated" from="SwipeDetector" to="." method="_on_SwipeDetector_swipe_updated"]
