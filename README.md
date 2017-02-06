@@ -10,7 +10,7 @@ as duration, speed, distance (from initial point), points, Curve2D.
 It also implements some basic pattern detections, but it is still
 experimental.
 
-![Trail](https://github.com/arypbatista/godot-swipe-detector/blob/master/docs/trail.png?raw=true)
+![Trail](https://github.com/arypbatista/godot-swipe-detector/blob/master/docs/images/trail.png?raw=true)
 
 ## Usage
 
@@ -56,8 +56,8 @@ represent pattern points.
 
 For example:
 
-![Square Pattern Tree](https://github.com/arypbatista/godot-swipe-detector/blob/master/docs/square-pattern-tree.png?raw=true)
-![Square Pattern Render](https://github.com/arypbatista/godot-swipe-detector/blob/master/docs/square-pattern-render.png?raw=true)
+![Square Pattern Tree](https://github.com/arypbatista/godot-swipe-detector/blob/master/docs/images/square-pattern-tree.png?raw=true)
+![Square Pattern Render](https://github.com/arypbatista/godot-swipe-detector/blob/master/docs/images/square-pattern-render.png?raw=true)
 
 When nesting this tree under your `SwipeDetector` node it will be included as a trigger pattern with the same name as the pattern node.
 

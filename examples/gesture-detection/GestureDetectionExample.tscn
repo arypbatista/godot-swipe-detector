@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://examples/gesture-detection/GestureDetectionExample.gd" type="Script" id=1]
-[ext_resource path="res://SwipeDetector.tscn" type="PackedScene" id=2]
-[ext_resource path="res://examples/gesture-detection/trail-particle.png" type="Texture" id=3]
-[ext_resource path="res://examples/gesture-detection/TrailGhost.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/swipe-detector/swipe_detector.gd" type="Script" id=2]
+[ext_resource path="res://addons/swipe-detector/icon.png" type="Texture" id=3]
+[ext_resource path="res://examples/gesture-detection/trail-particle.png" type="Texture" id=4]
+[ext_resource path="res://examples/gesture-detection/TrailGhost.tscn" type="PackedScene" id=5]
 
 [node name="GestureDetectionExample" type="Node2D"]
 
@@ -30,10 +31,19 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="SwipeDetector" parent="." instance=ExtResource( 2 )]
+[node name="SwipeDetector" type="Node" parent="."]
 
+script/script = ExtResource( 2 )
+__meta__ = { "_editor_icon":ExtResource( 3 ) }
+detect_gesture = true
+process_method = null
 distance_threshold = 80.0
+duration_threshold = 0.05
+limit_duration = false
+maximum_duration = -1.0
 minimum_points = 3
+limit_points = false
+maximum_points = -1
 pattern_detection_score_threshold = 80
 debug_mode = false
 
@@ -77,7 +87,7 @@ config/amount = 32
 config/lifetime = 0.2
 config/emitting = false
 config/local_space = false
-config/texture = ExtResource( 3 )
+config/texture = ExtResource( 4 )
 params/direction = 0.0
 params/spread = 10.0
 params/linear_velocity = 0.0
@@ -96,7 +106,7 @@ params/anim_speed_scale = 1.0
 params/anim_initial_pos = 0.0
 color/color = Color( 1, 0.609375, 0, 1 )
 
-[node name="TrailGhost" parent="." instance=ExtResource( 4 )]
+[node name="TrailGhost" parent="." instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 670.529, 580.305 )
 modulate = Color( 0.898438, 0.765076, 0.765076, 1 )

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://examples/swipe-signals/SwipeSignalsExample.gd" type="Script" id=1]
 [ext_resource path="res://examples/TestReferences.tscn" type="PackedScene" id=2]
-[ext_resource path="res://SwipeDetector.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/swipe-detector/swipe_detector.gd" type="Script" id=3]
+[ext_resource path="res://addons/swipe-detector/icon.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -22,8 +23,20 @@ max_scale = 5.0
 
 [node name="TestReferences" parent="." instance=ExtResource( 2 )]
 
-[node name="SwipeDetector" parent="." instance=ExtResource( 3 )]
+[node name="SwipeDetector" type="Node" parent="."]
 
+script/script = ExtResource( 3 )
+__meta__ = { "_editor_icon":ExtResource( 4 ) }
+detect_gesture = true
+process_method = null
+distance_threshold = 25.0
+duration_threshold = 0.05
+limit_duration = false
+maximum_duration = -1.0
+minimum_points = 2
+limit_points = false
+maximum_points = -1
+pattern_detection_score_threshold = 80
 debug_mode = false
 
 [node name="Points" type="Node2D" parent="."]
@@ -71,7 +84,6 @@ _update_shape_index = 0
 [node name="CollisionShape2D 2" type="CollisionShape2D" parent="KillZone"]
 
 transform/pos = Vector2( -983.91, 357.645 )
-transform/scale = Vector2( 1, 1 )
 shape = SubResource( 2 )
 trigger = false
 _update_shape_index = 1

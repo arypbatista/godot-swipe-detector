@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://examples/swipe-areas/SwipeAreasExample.gd" type="Script" id=1]
-[ext_resource path="res://SwipeDetector.tscn" type="PackedScene" id=2]
-[ext_resource path="res://examples/swipe-areas/trail-particle.png" type="Texture" id=3]
+[ext_resource path="res://addons/swipe-detector/swipe_detector.gd" type="Script" id=2]
+[ext_resource path="res://addons/swipe-detector/icon.png" type="Texture" id=3]
+[ext_resource path="res://examples/swipe-areas/trail-particle.png" type="Texture" id=4]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
@@ -18,10 +19,22 @@ extents = Vector2( 253, 313 )
 
 script/script = ExtResource( 1 )
 
-[node name="SwipeDetector" parent="." instance=ExtResource( 2 )]
+[node name="SwipeDetector" type="Node" parent="."]
 
-process_method = "Idle"
+editor/display_folded = true
+script/script = ExtResource( 2 )
+__meta__ = { "_editor_icon":ExtResource( 3 ) }
+detect_gesture = true
+process_method = null
 distance_threshold = 0.01
+duration_threshold = 0.05
+limit_duration = false
+maximum_duration = -1.0
+minimum_points = 2
+limit_points = false
+maximum_points = -1
+pattern_detection_score_threshold = 80
+debug_mode = false
 
 [node name="Red" type="Area2D" parent="SwipeDetector"]
 
@@ -119,7 +132,7 @@ config/amount = 32
 config/lifetime = 0.2
 config/emitting = false
 config/local_space = false
-config/texture = ExtResource( 3 )
+config/texture = ExtResource( 4 )
 params/direction = 0.0
 params/spread = 10.0
 params/linear_velocity = 20.0
@@ -144,7 +157,7 @@ config/amount = 32
 config/lifetime = 0.2
 config/emitting = false
 config/local_space = false
-config/texture = ExtResource( 3 )
+config/texture = ExtResource( 4 )
 params/direction = 0.0
 params/spread = 10.0
 params/linear_velocity = 20.0
