@@ -160,7 +160,7 @@ func set_swipe_process(method, value):
 			set_fixed_process(value)
 
 func detect(detect=true):
-	if ready:
+	if ready == true:
 		set_swipe_process(process_method, detect)
 		if not detect:
 			clean_states()
@@ -319,9 +319,9 @@ func detect_gestures(gesture):
 	var best_match
 	for pattern_name in pattern_detections.keys():
 		var actual_match = match_gestures(gesture, pattern_detections[pattern_name])
-		if actual_match.is_match() and (not best_match or actual_match.better_than(best_match)):
+		if actual_match.is_match() and (best_match == null or actual_match.better_than(best_match)):
 			best_match = actual_match
-	if best_match:
+	if best_match != null:
 		debug('Matched gesture "', best_match.pattern.name, '" with score ', str(best_match.score()))
 		emit_signal('pattern_detected', best_match.pattern.name, gesture)
 
@@ -343,7 +343,7 @@ class GestureMatch:
 		self.pattern = patternGesture
 
 	func score():
-		if not score:
+		if score == null:
 			var relative_pattern = pattern.gesture.relative()
 			var relative_sample  = sample.relative()
 			var sample_scale = scale(relative_pattern, relative_sample)
@@ -491,7 +491,7 @@ class SwipeGesture extends Node: # Extend node to access duplicate function
 		return area != null
 	
 	func get_distance():
-		if not distance and distance_points != points.size():
+		if distance == null and distance_points != points.size():
 			distance = calculate_distance()
 			distance_points = points.size()
 		return distance
@@ -545,7 +545,7 @@ class SwipeGesture extends Node: # Extend node to access duplicate function
 		return points.size()
 
 	func relative():
-		if not relative:
+		if relative == null:
 			relative = duplicate()
 			relative.points = []
 			for point in get_points():
