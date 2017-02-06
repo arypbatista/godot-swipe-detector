@@ -3,10 +3,12 @@ extends Node2D
 onready var trail = get_node('Trail')
 onready var matchDetected = get_node('Match')
 
-func _on_SwipeDetector_swipe_started( point ):
+func _on_SwipeDetector_swipe_started( partial_gesture ):
+	var point = partial_gesture.last_point()
 	matchDetected.hide()
 
-func _on_SwipeDetector_swipe_updated( point ):
+func _on_SwipeDetector_swipe_updated( partial_gesture ):
+	var point = partial_gesture.last_point()
 	trail.set_pos(point)
 	trail.set_emitting(true)
 
