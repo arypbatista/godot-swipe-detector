@@ -185,13 +185,13 @@ func process_swipe(delta, area=null):
 	var state = state(area)
 	if not state.capturing and swiping_started(area):
 		swipe_start(area)
-	elif state.capturing and swiping() and not reached_limit(area):
+	elif state.capturing and swiping(area) and not reached_limit(area):
 		swipe_update(delta, area)
-	elif state.capturing and swiping() and reached_limit(area):
+	elif state.capturing and swiping(area) and reached_limit(area):
 		swipe_stop(area, true)
-	elif state.capturing and not swiping():
+	elif state.capturing and not swiping(area):
 		swipe_stop(area)
-	state.was_swiping = swiping()
+	state.was_swiping = swiping(area)
 
 
 func clean_states():
@@ -199,19 +199,19 @@ func clean_states():
 
 
 func swiping_started(area):
-	return not state(area).was_swiping and swiping()
+	return not state(area).was_swiping and swiping(area)
 
-func swiping():
-	return swipe_input.swiping()
+func swiping(area):
+	return swipe_input.swiping(area)
 
 
-func swipe_point():
-	return swipe_input.swipe_point()
+func swipe_point(area):
+	return swipe_input.swipe_point(area)
 
 
 func swipe_start(area):
 	var state = state(area)
-	var point = swipe_point()
+	var point = swipe_point(area)
 	debug('Swipe started on point ', point)
 	state.capturing = true
 	state.last_update_delta = 0.0
@@ -244,7 +244,7 @@ func swipe_stop(area, forced=false):
 func swipe_update(delta, area):
 	var state = state(area)
 	var gesture = state.gesture
-	var point = swipe_point()
+	var point = swipe_point(area)
 	state.last_update_delta += delta
 	if gesture.last_point().distance_to(point) > distance_threshold:
 		debug('Swipe updated with point ', point, ' (delta: ' + str(delta) + ')')
@@ -606,15 +606,33 @@ class SwipeInput:
 
 class EventSwipeInput extends SwipeInput:
 
-	var swiping
-	var point
-	var area
-	var last_time
-	var delta
+	class InputState:
+
+		var area
+		var swiping
+		var point
+		var last_time
+		var delta
+		
+		func _init(area):
+			self.area = area
+
+
+	var states
 
 	func _init(detector).(detector):
-		self.swiping = false
-		delta = 0.0
+		states = {}
+
+	func area_name(area):
+		if area != null:
+			return area.get_name()
+		else:
+			return '_singleton'
+
+	func state(area):
+		if not states.has(area_name(area)):
+			states[area_name(area)] = InputState.new(area)
+		return states[area_name(area)]
 
 	func event_types():
 		return []
@@ -623,23 +641,24 @@ class EventSwipeInput extends SwipeInput:
 		process_input(event, area)
 
 	func process_input(event, area=null):
+		var state = state(area)
 		if event.type in self.event_types():
-			if not last_time:
-				delta = 0.0
+			if state.last_time == null:
+				state.delta = 0.0
 			else:
-				delta = (OS.get_ticks_msec() - last_time) / 1000.0
+				state.delta = (OS.get_ticks_msec() - state.last_time) / 1000.0
 
-			process_event(event, delta, area)
-			last_time = OS.get_ticks_msec()
+			process_event(event, state.delta, state)
+			state.last_time = OS.get_ticks_msec()
 
-	func process_event(event, delta, area=null):
+	func process_event(event, delta, state):
 		pass
 
-	func swiping():
-		return swiping
+	func swiping(area):
+		return state(area).swiping
 
-	func swipe_point():
-		return point
+	func swipe_point(area):
+		return state(area).point
 
 class PointerLikeSwipeEvent extends EventSwipeInput:
 
@@ -656,17 +675,18 @@ class PointerLikeSwipeEvent extends EventSwipeInput:
 	func extract_pos(event):
 		return event.pos
 	
-	func process_event(event, delta, area=null):
-		if event.type == press_event and event.is_pressed():
-			self.swiping = true
+	func process_event(event, delta, state):
+		if event.type == press_event:
+			if event.is_pressed():
+				state.swiping = true
+			else:
+				state.swiping = false
+				detector.process_swipe(delta, state.area)
 
-		self.point = extract_pos(event)
-		self.area  = area
-		detector.process_swipe(delta, area)
-
-		if event.type == press_event and not event.is_pressed():
-			self.swiping = false
-			detector.process_swipe(delta, area)
+		state.point = extract_pos(event)
+		
+		detector.process_swipe(delta, state.area)
+				
 	
 
 class MouseSwipeInput extends PointerLikeSwipeEvent:
