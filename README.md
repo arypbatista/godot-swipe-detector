@@ -26,13 +26,13 @@ You can set patterns for automatic detection (experimental), see [Working With P
 You can get the history of all gestures through `history()` method on swipe
 detector.
 
-### Example
+### Basic Example
 
 The following is an example of a callback connected to the `swiped` signal.
 This callback instances a cloud for each point. The cloud is a custom scene,
 you can replace it with your own.
 
-```py
+```GDScript
 func swiped(gesture):
 	for point in gesture.get_points():
 		var cloud = Cloud.instance()
@@ -67,7 +67,7 @@ See the [Gesture Detection Example With Patterns](./examples/gesture-detection/G
 
 The following example builds a square pattern and sets it as trigger pattern.
 
-```
+```GDScript
 onready var swipeDetector = get_node('SwipeDetector')
 
 func ready():
@@ -88,6 +88,14 @@ func on_pattern_detection(pattern_name, gesture):
 
 You may see [Gesture Detection Example](./examples/gesture-detection/GestureDetectionExample.tscn) where `SwipeDetector` API is used
 to set a recorded gesture as trigger pattern.
+
+### Multiple Swipe Spaces using Area2D
+
+You can specify the area where detection occurs by attaching Area2D 
+children to SwipeDetector. A simple use case for this would be to
+implement a pong game where each player swipes over the screen to
+control the player's paddle.
+
 
 
 
