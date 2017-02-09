@@ -61,7 +61,7 @@ For example:
 
 When nesting this tree under your `SwipeDetector` node it will be included as a trigger pattern with the same name as the pattern node.
 
-See the [Gesture Detection Example With Patterns](./examples/gesture-detection/GestureDetectionExample.tscn) for pattern detection example.
+See the [Gesture Detection Example With Patterns](./examples/gesture-detection/gesture_detection_example.tscn) for pattern detection example.
 
 #### Using `SwipeDetector` API to Add Patterns
 
@@ -86,7 +86,7 @@ func on_pattern_detection(pattern_name, gesture):
 
 ```
 
-You may see [Gesture Detection Example](./examples/gesture-detection/GestureDetectionExample.tscn) where `SwipeDetector` API is used
+You may see [Gesture Detection Example](./examples/gesture-detection/gesture_detection_example.tscn) where `SwipeDetector` API is used
 to set a recorded gesture as trigger pattern.
 
 ### Multiple Swipe Spaces using Area2D
@@ -95,6 +95,21 @@ You can specify the area where detection occurs by attaching Area2D
 children to SwipeDetector. A simple use case for this would be to
 implement a pong game where each player swipes over the screen to
 control the player's paddle.
+
+![Area2D Children](./docs/images/swipeareas.png)
+
+If Area2D children are attached to SwipeDetector, swipes will be only
+detected in these specific areas and each gesture will contain information
+regarding the area where it was originated.
+
+```GDScript
+func _on_SwipeDetector_swipe_started( partial_gesture ):
+    print('Swipe started on area ', partial_gesture.get_area().get_name()) 
+```
+
+If not Area2D children are attached, gestures' `get_area()` method will return `null`.
+
+You may see [Swipe Areas Example](./examples/swipe-areas/swipe_areas_example.tscn) where swipe detections are performed in two different areas and a trail is rendered in different color for each of these.
 
 
 
@@ -142,7 +157,7 @@ Methods intended for public usage are:
 - `history()` - list of all the gestures detected since component creation.
 - `points_to_gesture(points)` - Build a gesture object from a list of points.
 
-Direction constants:
+Direction constants, available on `addons/swipe-detector/directions.gd`:
 
 - `DIRECTION_DOWN`
 - `DIRECTION_DOWN_RIGHT`
