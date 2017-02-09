@@ -61,7 +61,7 @@ For example:
 
 When nesting this tree under your `SwipeDetector` node it will be included as a trigger pattern with the same name as the pattern node.
 
-See the [Gesture Detection Example With Patterns](./examples/gesture-detection/gesture_detection_example.tscn) for pattern detection example.
+See the [Gesture Detection Example With Patterns](./examples/gesture-detection/gesture_detection_with_patterns_example.tscn) for pattern detection example.
 
 #### Using `SwipeDetector` API to Add Patterns
 
