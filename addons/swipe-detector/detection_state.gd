@@ -1,7 +1,7 @@
 # State for a detection instance
 
 var area_name
-var capturing = false
+var capturing
 var gesture
 var last_update_delta
 var was_swiping

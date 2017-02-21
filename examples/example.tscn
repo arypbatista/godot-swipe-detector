@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=8 format=1]
 
 [sub_resource type="GDScript" id=1]
 
@@ -7,6 +7,30 @@ script/source = "extends Label\n\nfunc _ready():\n\tset_text(get_parent().get_na
 [sub_resource type="GDScript" id=2]
 
 script/source = "\n\nfunc _on_BackButton_pressed():\n\tget_tree().change_scene(\'res://examples/examples.tscn\')\n"
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -1907.53, -1250.8, 2615.07, -1152.49, 1990.28, -478.309, -804.973, -541.514 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 1997.3, -408.083, 2818.96, -1161.39, 2875.03, 1857.6, 1950.5, 1139.85 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 1950.5, 1139.85, 2875.03, 1857.6, -1809.22, 1998.06, -640.866, 1153.9 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -1809.22, 1998.06, -1907.53, -1250.8, -804.973, -541.514, -640.866, 1153.9 )
+
+[sub_resource type="GDScript" id=7]
+
+script/source = "export (bool) var enabled = false\n\nfunc _on_KillZone_body_enter( body ):\n\tif enabled:\n\t\tprint(body, \': \', body.get_name(), \' queued to free.\')\n\t\tbody.queue_free()\n"
 
 [node name="Example" type="Node2D"]
 
@@ -45,6 +69,38 @@ text = "X"
 flat = true
 script/script = SubResource( 2 )
 
+[node name="KillZone" type="Area2D" parent="."]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 4 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 5 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+shapes/3/shape = SubResource( 6 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/3/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = SubResource( 7 )
+enabled = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="KillZone"]
+
+build_mode = 0
+polygon = Vector2Array( 1997.3, -408.083, 2818.96, -1161.39, 2875.03, 1857.6, -1809.22, 1998.06, -1907.53, -1250.8, 2615.07, -1152.49, 1990.28, -478.309, -804.973, -541.514, -640.866, 1153.9, 1950.5, 1139.85 )
+shape_range = Vector2( 0, 3 )
+trigger = false
+
 [connection signal="pressed" from="BackButton" to="BackButton" method="_on_BackButton_pressed"]
+
+[connection signal="body_enter" from="KillZone" to="KillZone" method="_on_KillZone_body_enter"]
 
 

@@ -9,6 +9,10 @@
 
 script/script = ExtResource( 2 )
 
+[node name="KillZone" parent="."]
+
+enabled = true
+
 [node name="SwipeDetector" type="Node" parent="."]
 
 script/script = ExtResource( 3 )
