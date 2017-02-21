@@ -192,3 +192,7 @@ Methods intended for public usage are:
 - `get_direction()` - Return a direction string use constants to test this values.
 - `get_direction_vector()` - Returns the direction vector.
 - `get_direction_angle()` - Returns the direction angle.
+
+## Future Work
+
+Want to know what is ahead? Visit the [enhancements list](../../labels/enhancement)!
