@@ -11,7 +11,7 @@ var point_scale
 func spawn_point(point, scale=1.0, color=null):
 	var point_object = Point.instance()
 	point_object.set_point_scale(scale)
-	point_object.set_pos(point)
+	point_object.set_position(point)
 	if color != null:
 		point_object.colorize(color)
 	get_node('Points').add_child(point_object)

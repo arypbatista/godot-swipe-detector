@@ -1,5 +1,5 @@
 
-const EuclideanSimilarityAlgorithm = preload('euclidean_similarity_algorithm.gd')
+const EuclideanSimilarityAlgorithm = preload("res://addons/swipe-detector/matching/euclidean_similarity_algorithm.gd")
 
 func similarity_score(pointsA, pointsB):
   return EuclideanSimilarityAlgorithm.new().similarity_score(delta_chain(pointsA), delta_chain(pointsB))

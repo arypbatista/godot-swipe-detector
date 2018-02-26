@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://examples/example.tscn" type="PackedScene" id=1]
 [ext_resource path="res://examples/swipe-areas/swipe_areas_example.gd" type="Script" id=2]
@@ -6,27 +6,102 @@
 [ext_resource path="res://addons/swipe-detector/icon.png" type="Texture" id=4]
 [ext_resource path="res://examples/swipe-areas/trail-particle.png" type="Texture" id=5]
 
-[sub_resource type="ConvexPolygonShape2D" id=1]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 960, 640, 512, 640, 512, 0, 960, 0 )
-
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 253, 313 )
 
-[node name="SwipeAreasExample" instance=ExtResource( 1 )]
+[sub_resource type="ParticlesMaterial" id=2]
 
-script/script = ExtResource( 2 )
+render_priority = 0
+trail_divisor = 1
+emission_shape = 0
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 45.0
+flatness = 0.0
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 1.0
+initial_velocity_random = 0.0
+angular_velocity = 0.0
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 0.0
+scale = 1.0
+scale_random = 0.0
+color = Color( 1, 0, 0, 1 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Color" ]
 
-[node name="SwipeDetector" type="Node" parent="."]
+[sub_resource type="ParticlesMaterial" id=3]
 
-editor/display_folded = true
-script/script = ExtResource( 3 )
-__meta__ = { "_editor_icon":ExtResource( 4 ) }
+render_priority = 0
+trail_divisor = 1
+emission_shape = 0
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 45.0
+flatness = 0.0
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 1.0
+initial_velocity_random = 0.0
+angular_velocity = 0.0
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 0.0
+scale = 1.0
+scale_random = 0.0
+color = Color( 0, 0.0859375, 1, 1 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Color" ]
+
+[node name="SwipeAreasExample" index="0" instance=ExtResource( 1 )]
+
+script = ExtResource( 2 )
+_sections_unfolded = [ "Pause" ]
+
+[node name="SwipeDetector" type="Node" parent="." index="2"]
+
+script = ExtResource( 3 )
+__meta__ = {
+"_editor_icon": ExtResource( 4 )
+}
 detect_gesture = true
-process_method = null
+process_method = "Idle"
 distance_threshold = 0.01
 duration_threshold = 0.05
 limit_duration = false
@@ -37,129 +112,131 @@ maximum_points = -1
 pattern_detection_score_threshold = 80
 debug_mode = false
 
-[node name="Red" type="Area2D" parent="SwipeDetector"]
+[node name="Red" type="Area2D" parent="SwipeDetector" index="0"]
 
-editor/display_folded = true
-input/pickable = true
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
+input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SwipeDetector/Red"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SwipeDetector/Red" index="0"]
 
 build_mode = 0
-polygon = Vector2Array( 960, 0, 512, 0, 512, 640, 960, 640 )
-shape_range = Vector2( 0, 0 )
-trigger = false
+polygon = PoolVector2Array( 960, 0, 512, 0, 512, 640, 960, 640 )
+_sections_unfolded = [ "Transform" ]
 
-[node name="Blue" type="Area2D" parent="SwipeDetector"]
+[node name="Blue" type="Area2D" parent="SwipeDetector" index="1"]
 
-editor/display_folded = true
-input/pickable = true
-shapes/0/shape = SubResource( 2 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 256, 316 )
-shapes/0/trigger = false
+input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SwipeDetector/Blue"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwipeDetector/Blue" index="0"]
 
-transform/pos = Vector2( 256, 316 )
-shape = SubResource( 2 )
-trigger = false
-_update_shape_index = 0
+position = Vector2( 256, 316 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
-[node name="Label1" type="Label" parent="."]
+[node name="Label1" type="Label" parent="." index="3"]
 
-rect/scale = Vector2( 2, 2 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 607.0
-margin/top = 300.0
-margin/right = 759.0
-margin/bottom = 331.0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 607.0
+margin_top = 300.0
+margin_right = 759.0
+margin_bottom = 331.0
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 2
+size_flags_vertical = 0
 custom_colors/font_color = Color( 1, 0.433594, 0.433594, 1 )
-text = "Red\nArea"
+text = "Red
+Area"
 align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Label2" type="Label" parent="."]
+[node name="Label2" type="Label" parent="." index="4"]
 
-rect/scale = Vector2( 2, 2 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 78.0
-margin/top = 300.0
-margin/right = 230.0
-margin/bottom = 331.0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 78.0
+margin_top = 300.0
+margin_right = 230.0
+margin_bottom = 331.0
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 2
+size_flags_vertical = 0
 custom_colors/font_color = Color( 0.572388, 0.558594, 1, 1 )
-text = "Blue\nArea"
+text = "Blue
+Area"
 align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="RedTrail" type="Particles2D" parent="."]
+[node name="RedTrail" type="Particles2D" parent="." index="5"]
 
-config/amount = 32
-config/lifetime = 0.2
-config/emitting = false
-config/local_space = false
-config/texture = ExtResource( 5 )
-params/direction = 0.0
-params/spread = 10.0
-params/linear_velocity = 20.0
-params/spin_velocity = 0.0
-params/orbit_velocity = 0.0
-params/gravity_direction = 0.0
-params/gravity_strength = 9.8
-params/radial_accel = 0.0
-params/tangential_accel = 0.0
-params/damping = 0.0
-params/initial_angle = 0.0
-params/initial_size = 1.0
-params/final_size = 1.0
-params/hue_variation = 0.0
-params/anim_speed_scale = 1.0
-params/anim_initial_pos = 0.0
-color/color = Color( 1, 0, 0, 1 )
+emitting = false
+amount = 20
+lifetime = 0.2
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = false
+draw_order = 0
+process_material = SubResource( 2 )
+texture = ExtResource( 5 )
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time" ]
 
-[node name="BlueTrail" type="Particles2D" parent="."]
+[node name="BlueTrail" type="Particles2D" parent="." index="6"]
 
-config/amount = 32
-config/lifetime = 0.2
-config/emitting = false
-config/local_space = false
-config/texture = ExtResource( 5 )
-params/direction = 0.0
-params/spread = 10.0
-params/linear_velocity = 20.0
-params/spin_velocity = 0.0
-params/orbit_velocity = 0.0
-params/gravity_direction = 0.0
-params/gravity_strength = 9.8
-params/radial_accel = 0.0
-params/tangential_accel = 0.0
-params/damping = 0.0
-params/initial_angle = 0.0
-params/initial_size = 1.0
-params/final_size = 1.0
-params/hue_variation = 0.0
-params/anim_speed_scale = 1.0
-params/anim_initial_pos = 0.0
-color/color = Color( 0, 0.0390625, 1, 1 )
+emitting = false
+amount = 20
+lifetime = 0.2
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = false
+draw_order = 0
+process_material = SubResource( 3 )
+texture = ExtResource( 5 )
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time" ]
 
 [connection signal="swipe_ended" from="SwipeDetector" to="." method="_on_SwipeDetector_swipe_ended"]
 

@@ -1,112 +1,143 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=2 format=2]
 
-[sub_resource type="GDScript" id=1]
+[ext_resource path="res://examples/examples.gd" type="Script" id=1]
 
-script/source = "extends Container\n\n\nonready var dropdown = get_node(\'PanelContainer/HBoxContainer/VBoxContainer/OptionButton\')\nvar options\n\nfunc load_options():\n\toptions  = []\n\toptions.append(\'swipe-spawner/swipe_spawner\')\n\toptions.append(\'swipe-spawner/point_limited_swipe_spawner\')\n\toptions.append(\'swipe-spawner/duration_limited_swipe_spawner\')\n\toptions.append(\'swipe-impulse/swipe_impulse\')\n\toptions.append(\'swipe-impulse/swipe_smooth_impulse\')\n\toptions.append(\'swipe-impulse/swipe_touch_smooth_impulse\')\n\toptions.append(\'swipe-signals/swipe_signals\')\n\toptions.append(\'swipe-trail/swipe_trail\')\n\toptions.append(\'swipe-areas/swipe_areas\')\n\toptions.append(\'swipe-direction/swipe_direction\')\n\toptions.append(\'gesture-detection/gesture_detection\')\n\toptions.append(\'gesture-detection/gesture_detection_with_patterns\')\n\nfunc populate_dropdown():\n\tfor option in options:\n\t\tdropdown.add_item(option.split(\'/\')[1])\n\nfunc _ready():\n\tload_options()\n\tpopulate_dropdown()\n\nfunc launch():\n\tvar selected_example = 0\n\tif dropdown.get_selected() > 0:\n\t\tselected_example = dropdown.get_selected()\n\t\t\n\tprint(\'Selected example \', selected_example)\n\tload_example(options[selected_example])\n\nfunc load_example(example):\n\tprint(\'Loading example \', example)\n\tget_tree().change_scene(\'res://examples/\' + example + \'_example.tscn\')\n"
+[node name="Examples" type="Container" index="0"]
 
-[node name="Examples" type="Container"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 1 )
+_sections_unfolded = [ "Margin", "Rect" ]
 
-anchor/right = 1
-anchor/bottom = 1
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 480.0
-margin/bottom = 320.0
-script/script = SubResource( 1 )
+[node name="PanelContainer" type="PanelContainer" parent="." index="0"]
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -65.0
+margin_top = -64.0
+margin_right = 65.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 
-anchor/right = 1
-anchor/bottom = 1
-rect/scale = Vector2( 2, 2 )
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 0
-size_flags/vertical = 0
-margin/left = 209.0
-margin/top = 184.0
-margin/right = -9.0
-margin/bottom = 8.0
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" index="0"]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = false
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 7.0
-margin/top = 7.0
-margin/right = 273.0
-margin/bottom = 121.0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 123.0
+margin_bottom = 121.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer" index="0"]
 
-focus/ignore_mouse = false
-focus/stop_mouse = false
-size_flags/horizontal = 0
-size_flags/vertical = 2
-margin/left = 75.0
-margin/top = 0.0
-margin/right = 191.0
-margin/bottom = 114.0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 116.0
+margin_bottom = 114.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 custom_constants/separation = 30
 alignment = 1
 
-[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer" index="0"]
 
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 116.0
-margin/bottom = 14.0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 116.0
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
 text = "Select an Example"
 align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="OptionButton" type="OptionButton" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="OptionButton" type="OptionButton" parent="PanelContainer/HBoxContainer/VBoxContainer" index="1"]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 44.0
-margin/right = 116.0
-margin/bottom = 64.0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 44.0
+margin_right = 116.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 toggle_mode = true
-click_on_press = true
+action_mode = 0
 enabled_focus_mode = 2
 shortcut = null
+group = null
 flat = false
 align = 0
-selected = -1
 items = [  ]
+selected = -1
 
-[node name="Button" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer" index="2"]
 
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 94.0
-margin/right = 116.0
-margin/bottom = 114.0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 94.0
+margin_right = 116.0
+margin_bottom = 114.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
+group = null
 text = "Launch"
 flat = false
+align = 1
 
 [connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer/Button" to="." method="launch"]
 

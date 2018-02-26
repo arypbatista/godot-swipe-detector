@@ -1,7 +1,7 @@
-extends 'gesture_match.gd'
+extends "res://addons/swipe-detector/matching/gesture_match.gd"
 
 
-const ShapeSimilarityAlgorithm = preload('shape_similarity_algorithm.gd')
+const ShapeSimilarityAlgorithm = preload("res://addons/swipe-detector/matching/shape_similarity_algorithm.gd")
 
 
 # Don't use yet, lot of false possitives

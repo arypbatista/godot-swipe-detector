@@ -1,5 +1,7 @@
-const MouseSwipeInput = preload('mouse_swipe_input.gd')
-const TouchSwipeInput = preload('touch_swipe_input.gd')
+extends Node
+
+const MouseSwipeInput = preload("res://addons/swipe-detector/input/mouse_swipe_input.gd")
+const TouchSwipeInput = preload("res://addons/swipe-detector/input/touch_swipe_input.gd")
 
 func on_touch_device():
 	return OS.get_name() in ['Android', 'iOS']

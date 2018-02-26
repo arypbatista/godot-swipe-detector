@@ -1,3 +1,4 @@
+extends Node2D
 
 const TrailGhost = preload('trail_ghost.tscn')
 
@@ -29,7 +30,7 @@ func render_gesture(gesture, container, color=Color('#20000000')):
 	free_children(container)
 	for point in gesture.get_points():
 		var trailGhost = TrailGhost.instance()
-		trailGhost.set_pos(point)
+		trailGhost.set_position(point)
 		trailGhost.set_modulate(color)
 		container.add_child(trailGhost)
 
@@ -48,7 +49,7 @@ func _on_SwipeDetector_swipe_started( partial_gesture ):
 
 func _on_SwipeDetector_swipe_updated( partial_gesture ):
 	var point = partial_gesture.last_point()
-	trail.set_pos(point)
+	trail.set_position(point)
 	trail.set_emitting(true)
 
 func _on_SwipeDetector_swipe_ended( gesture ):

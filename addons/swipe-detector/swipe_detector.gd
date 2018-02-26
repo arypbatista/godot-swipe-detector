@@ -9,19 +9,19 @@ extends Node
 
 # Constant Imports
 
-const SwipeGesture = preload('swipe_gesture.gd')
+const SwipeGesture = preload("res://addons/swipe-detector/swipe_gesture.gd")
 
-const DetectionState = preload('detection_state.gd')
-const GesturePattern = preload('gesture/pattern.gd')
+const DetectionState = preload("res://addons/swipe-detector/detection_state.gd")
+const GesturePattern = preload("res://addons/swipe-detector/gesture/pattern.gd")
 
-const ShapeMatch = preload('matching/shape_match.gd')
-const EuclideanMatch = preload('matching/euclidean_match.gd')
+const ShapeMatch = preload("res://addons/swipe-detector/matching/shape_match.gd")
+const EuclideanMatch = preload("res://addons/swipe-detector/matching/euclidean_match.gd")
 
 
 # Singleton Imports
 
-var Directions = preload('directions.gd').new()
-var InputProvider = preload('input/input_provider.gd').new()
+var Directions = preload("res://addons/swipe-detector/directions.gd").new()
+var InputProvider = preload("res://addons/swipe-detector/input/input_provider.gd").new()
 
 
 ## Signals
@@ -109,7 +109,7 @@ func _ready():
 func detect_areas():
 	var areas = []
 	for child in get_children():
-		if child.get_type() == 'Area2D':
+		if child is Area2D:
 			areas.append(child)
 	return areas
 
@@ -135,8 +135,10 @@ func connect_detection_areas():
 		area.connect('input_event', swipe_input, 'process_area_input', [area])
 
 func set_swipe_process(method, value):
+	set_process(!value)
 	if swipe_input.has_method('process_input'):
 		if detection_areas.size() > 0:
+			set_process_input(false)
 			connect_detection_areas()
 		else:
 			set_process_input(value)
@@ -280,10 +282,10 @@ func remove_pattern_detection(name):
 
 func add_children_as_patterns():
 	for child in get_children():
-		if child.get_type() != 'Area2D':
+		if !child is Area2D:
 			var gesture = SwipeGesture.new()
 			for point in child.get_children():
-				gesture.add_point(point.get_pos())
+				gesture.add_point(point.get_position())
 			add_pattern_detection(child.get_name(), gesture)
 
 func detect_gestures(gesture):

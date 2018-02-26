@@ -9,7 +9,7 @@ func _on_SwipeDetector_swipe_started( partial_gesture ):
 
 func _on_SwipeDetector_swipe_updated( partial_gesture ):
 	var point = partial_gesture.last_point()
-	trail.set_pos(point)
+	trail.set_position(point)
 	trail.set_emitting(true)
 
 func _on_SwipeDetector_swipe_ended( gesture ):

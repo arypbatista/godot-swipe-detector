@@ -10,5 +10,5 @@ func _init(detector):
 
 # If defined, it will be called on SwipeDetector
 # _process method.
-# func process(delta):
-#     pass
+#func process(delta):
+#	pass

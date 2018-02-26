@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://examples/example.tscn" type="PackedScene" id=1]
 [ext_resource path="res://examples/swipe-spawner/swipe_spawner_example.gd" type="Script" id=2]
@@ -7,12 +7,14 @@
 
 [node name="PointLimitedSwipeSpawnerExample" instance=ExtResource( 1 )]
 
-script/script = ExtResource( 2 )
+script = ExtResource( 2 )
 
 [node name="SwipeDetector" type="Node" parent="."]
 
-script/script = ExtResource( 3 )
-__meta__ = { "_editor_icon":ExtResource( 4 ) }
+script = ExtResource( 3 )
+__meta__ = {
+"_editor_icon": ExtResource( 4 )
+}
 detect_gesture = true
 process_method = null
 distance_threshold = 25.0
@@ -27,8 +29,7 @@ debug_mode = true
 
 [node name="Points" type="Node2D" parent="."]
 
-[connection signal="pressed" from="BackButton" to="BackButton" method="_on_BackButton_pressed"]
 
-[connection signal="swiped" from="SwipeDetector" to="." method="_on_SwipeDetector_swiped"]
+[connection signal="pressed"  from="BackButton"  to="BackButton" method="_on_BackButton_pressed" binds=[  ]]
 
-
+[connection signal="swiped"  from="SwipeDetector"  to="." method="_on_SwipeDetector_swiped" binds=[  ]]

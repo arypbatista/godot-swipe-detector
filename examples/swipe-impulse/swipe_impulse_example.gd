@@ -13,11 +13,11 @@ func _on_SwipeDetector_swipe_started( partial_gesture ):
 	var point = partial_gesture.last_point()
 	sliding_object = get_object(point)
 	if sliding_object != null:
-		print('We have a sliding object on: ', sliding_object.get_pos())
+		print('We have a sliding object on: ', sliding_object.get_position())
 
 
 func _on_SwipeDetector_swipe_ended( gesture ):
 	if sliding_object != null:
-		var angle = gesture.first_point().angle_to_point(gesture.last_point())
+		var angle = gesture.first_point().angle_to_point(gesture.last_point()) - PI/2
 		sliding_object.impulse(gesture.get_speed(), angle) 
 		sliding_object = null

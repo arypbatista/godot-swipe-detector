@@ -1,0 +1,23 @@
+[application]
+
+config/icon = "res://icon.png"
+config/name = "godot-swipe-detector"
+run/main_scene = "res://examples/examples.tscn"
+
+[display]
+
+window/size/height = 640
+window/size/width = 960
+window/stretch/mode = "viewport"
+
+[editor_plugins]
+
+enabled = [ "swipe-detector" ]
+
+[importer_defaults]
+
+texture = {
+"flags/filter": true,
+"flags/mipmaps": true
+}
+
