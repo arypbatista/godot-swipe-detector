@@ -1,5 +1,5 @@
-extends 'pointer_like_swipe_input.gd'
+extends "pointer_like_swipe_input.gd"
 
 
-func _init(detector).(detector, InputEvent.SCREEN_TOUCH, InputEvent.SCREEN_DRAG):
+func _init(detector).(detector, InputEventScreenTouch, InputEventScreenDrag):
   pass

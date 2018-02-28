@@ -13,12 +13,12 @@ func trail_for(gesture):
 
 func _on_SwipeDetector_swipe_started( partial_gesture ):
 	var trail = trail_for(partial_gesture)
-	trail.set_pos(partial_gesture.last_point())
+	trail.set_position(partial_gesture.last_point())
 	trail.set_emitting(true)
 
 func _on_SwipeDetector_swipe_updated( partial_gesture ):
 	var trail = trail_for(partial_gesture)
-	trail.set_pos(partial_gesture.last_point())
+	trail.set_position(partial_gesture.last_point())
 
 func _on_SwipeDetector_swipe_ended( gesture ):
 	var trail = trail_for(gesture)

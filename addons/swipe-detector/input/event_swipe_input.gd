@@ -1,6 +1,6 @@
-extends 'swipe_input.gd'
+extends "swipe_input.gd"
 
-const InputState = preload('input_state.gd')
+const InputState = preload("input_state.gd" )
 
 var states
 
@@ -21,12 +21,20 @@ func state(area):
 func event_types():
   return []
 
+func valid_event(event):
+  var is_valid = false
+  for type in event_types():
+    if event is type:
+      is_valid = true
+      break
+  return is_valid
+
 func process_area_input(viewport, event, shape_id, area):
   process_input(event, area)
 
 func process_input(event, area=null):
-  var state = state(area)
-  if event.type in self.event_types():
+  if valid_event(event):
+    var state = state(area)
     if state.last_time == null:
       state.delta = 0.0
     else:

@@ -9,5 +9,5 @@ func _on_SwipeDetector_swiped( gesture ):
 
 func spawn_point(point):
 	var point_object = Point.instance()
-	point_object.set_pos(point)
-	get_node('Points').add_child(point_object)
+	point_object.set_position(point)
+	$Points.add_child(point_object)
