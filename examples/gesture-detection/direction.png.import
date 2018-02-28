@@ -4,14 +4,6 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/direction.png-a8f481e6aa1adf112f9d5a7bd876ca23.stex"
 
-[deps]
-
-source_file="res://examples/gesture-detection/direction.png"
-source_md5="2fc2ec9fed3ece455a0ee19c4525bfd5"
-
-dest_files=[ "res://.import/direction.png-a8f481e6aa1adf112f9d5a7bd876ca23.stex" ]
-dest_md5="d67458ad2a00eb471350d0b39a3a291f"
-
 [params]
 
 compress/mode=0

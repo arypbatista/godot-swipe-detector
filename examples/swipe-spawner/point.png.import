@@ -4,14 +4,6 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/point.png-25e917cbd2ea7741074de56532f8010e.stex"
 
-[deps]
-
-source_file="res://examples/swipe-spawner/point.png"
-source_md5="e4ccd4475adf786b88ae3e73e6d6f3db"
-
-dest_files=[ "res://.import/point.png-25e917cbd2ea7741074de56532f8010e.stex" ]
-dest_md5="77b0d795ef465689106630be6716ab3b"
-
 [params]
 
 compress/mode=0

@@ -49,7 +49,7 @@ _sections_unfolded = [ "Gravity", "Trail" ]
 
 script = ExtResource( 2 )
 
-[node name="SwipeDetector" type="Node" parent="." index="2"]
+[node name="SwipeDetector" type="Node" parent="."]
 
 script = ExtResource( 3 )
 __meta__ = {
@@ -67,7 +67,7 @@ maximum_points = -1
 pattern_detection_score_threshold = 80
 debug_mode = false
 
-[node name="Particles2D" type="Particles2D" parent="." index="3"]
+[node name="Particles2D" type="Particles2D" parent="."]
 
 emitting = false
 amount = 20

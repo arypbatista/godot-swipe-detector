@@ -4,14 +4,6 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/trail-particle.png-0539b8ba0949b21660012b931387d402.stex"
 
-[deps]
-
-source_file="res://examples/swipe-direction/trail-particle.png"
-source_md5="d7d215e2b6ca91d6f388274d1e20814b"
-
-dest_files=[ "res://.import/trail-particle.png-0539b8ba0949b21660012b931387d402.stex" ]
-dest_md5="d9c2103317f25eb2a2b951a5c27a9411"
-
 [params]
 
 compress/mode=0

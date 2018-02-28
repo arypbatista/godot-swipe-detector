@@ -2,7 +2,7 @@
 
 [ext_resource path="res://examples/examples.gd" type="Script" id=1]
 
-[node name="Examples" type="Container" index="0"]
+[node name="Examples" type="Container"]
 
 anchor_left = 0.5
 anchor_top = 0.5
@@ -11,13 +11,12 @@ anchor_bottom = 0.5
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
 _sections_unfolded = [ "Margin", "Rect" ]
 
-[node name="PanelContainer" type="PanelContainer" parent="." index="0"]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 
 anchor_left = 0.5
 anchor_top = 0.5
@@ -30,11 +29,10 @@ margin_bottom = 64.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" index="0"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -47,12 +45,11 @@ margin_bottom = 121.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer" index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -63,13 +60,12 @@ margin_bottom = 114.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_constants/separation = 30
 alignment = 1
 
-[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer" index="0"]
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -80,7 +76,6 @@ margin_bottom = 14.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 text = "Select an Example"
@@ -89,7 +84,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="OptionButton" type="OptionButton" parent="PanelContainer/HBoxContainer/VBoxContainer" index="1"]
+[node name="OptionButton" type="OptionButton" parent="PanelContainer/HBoxContainer/VBoxContainer"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -100,9 +95,7 @@ margin_right = 116.0
 margin_bottom = 64.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-focus_mode = 2
 mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 toggle_mode = true
@@ -112,10 +105,10 @@ shortcut = null
 group = null
 flat = false
 align = 0
-items = [  ]
 selected = -1
+items = [  ]
 
-[node name="Button" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer" index="2"]
+[node name="Button" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -126,9 +119,7 @@ margin_right = 116.0
 margin_bottom = 114.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-focus_mode = 2
 mouse_filter = 0
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 toggle_mode = false
@@ -137,7 +128,6 @@ shortcut = null
 group = null
 text = "Launch"
 flat = false
-align = 1
 
 [connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer/Button" to="." method="launch"]
 

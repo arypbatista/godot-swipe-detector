@@ -4,14 +4,6 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/swipeareas.png-73002a6683381516bfa3e8972f364e6c.stex"
 
-[deps]
-
-source_file="res://docs/images/swipeareas.png"
-source_md5="c621ae307aa8e048f14efb7b55afa712"
-
-dest_files=[ "res://.import/swipeareas.png-73002a6683381516bfa3e8972f364e6c.stex" ]
-dest_md5="725279d2c7653eba3a401d15efac0d2e"
-
 [params]
 
 compress/mode=0

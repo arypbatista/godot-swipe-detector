@@ -4,14 +4,6 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/trail.png-90466b75d17dc549ba78f14cbef6005f.stex"
 
-[deps]
-
-source_file="res://docs/images/trail.png"
-source_md5="1e6a605655b6acc92e60206fcff068ec"
-
-dest_files=[ "res://.import/trail.png-90466b75d17dc549ba78f14cbef6005f.stex" ]
-dest_md5="5af7984d7085b619ed40688c97badd94"
-
 [params]
 
 compress/mode=0

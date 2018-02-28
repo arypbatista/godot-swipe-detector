@@ -4,14 +4,6 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/square-pattern-render.png-b997e588822f8ddb1643c226aa601124.stex"
 
-[deps]
-
-source_file="res://docs/images/square-pattern-render.png"
-source_md5="a4969bd9c69d3fee48571f7ff18da225"
-
-dest_files=[ "res://.import/square-pattern-render.png-b997e588822f8ddb1643c226aa601124.stex" ]
-dest_md5="1df9b18f11e61234662a633910375e63"
-
 [params]
 
 compress/mode=0

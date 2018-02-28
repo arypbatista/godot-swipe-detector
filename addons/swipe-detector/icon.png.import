@@ -4,14 +4,6 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/icon.png-b60332a6acd93e3e505c096e8ada5608.stex"
 
-[deps]
-
-source_file="res://addons/swipe-detector/icon.png"
-source_md5="36fb46fe5fdc3f60c8d52f9601e35a22"
-
-dest_files=[ "res://.import/icon.png-b60332a6acd93e3e505c096e8ada5608.stex" ]
-dest_md5="1207058f13d48af2c969e216d643aad6"
-
 [params]
 
 compress/mode=0
