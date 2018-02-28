@@ -1,4 +1,4 @@
-extends "res://addons/swipe-detector/input/event_swipe_input.gd"
+extends "event_swipe_input.gd"
 
 var press_event
 var motion_event

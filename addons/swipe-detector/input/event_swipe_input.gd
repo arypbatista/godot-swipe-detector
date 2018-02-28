@@ -1,6 +1,6 @@
-extends "res://addons/swipe-detector/input/swipe_input.gd"
+extends "swipe_input.gd"
 
-const InputState = preload("res://addons/swipe-detector/input/input_state.gd" )
+const InputState = preload("input_state.gd" )
 
 var states
 

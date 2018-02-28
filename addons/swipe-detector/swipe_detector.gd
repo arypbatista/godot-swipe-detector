@@ -9,19 +9,19 @@ extends Node
 
 # Constant Imports
 
-const SwipeGesture = preload("res://addons/swipe-detector/swipe_gesture.gd")
+const SwipeGesture = preload("swipe_gesture.gd")
 
-const DetectionState = preload("res://addons/swipe-detector/detection_state.gd")
-const GesturePattern = preload("res://addons/swipe-detector/gesture/pattern.gd")
+const DetectionState = preload("detection_state.gd")
+const GesturePattern = preload("gesture/pattern.gd")
 
-const ShapeMatch = preload("res://addons/swipe-detector/matching/shape_match.gd")
-const EuclideanMatch = preload("res://addons/swipe-detector/matching/euclidean_match.gd")
+const ShapeMatch = preload("matching/shape_match.gd")
+const EuclideanMatch = preload("matching/euclidean_match.gd")
 
 
 # Singleton Imports
 
-var Directions = preload("res://addons/swipe-detector/directions.gd").new()
-var InputProvider = preload("res://addons/swipe-detector/input/input_provider.gd").new()
+var Directions = preload("directions.gd").new()
+var InputProvider = preload("input/input_provider.gd").new()
 
 
 ## Signals
