@@ -5,6 +5,7 @@ onready var trail = $Trail
 onready var sectors = $Sectors
 
 func _ready():
+  $Values.hide()
   hide_spots()
 
 func _on_SwipeDetector_swipe_started( partial_gesture ):
@@ -25,11 +26,9 @@ func show_spot(index):
   
 func _on_SwipeDetector_swipe_ended( gesture ):
   trail.set_emitting(false)
-  $DirectionLabel.set_text(gesture.get_direction())
-  $AngleValue.set_text(str(gesture.get_direction_angle()))
-  $DirectionLabel.show()
-  $AngleLabel.show()
-  $AngleValue.show()
+  $Values/Direction.set_text(gesture.get_direction())
+  $Values/Angle/Value.set_text(str(gesture.get_direction_angle()))
+  $Values.show()
   hide_spots()
   show_spot(gesture.get_direction_index())
 

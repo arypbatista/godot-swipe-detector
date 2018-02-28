@@ -2,7 +2,7 @@
 
 [ext_resource path="res://examples/example.tscn" type="PackedScene" id=1]
 [ext_resource path="res://examples/swipe-impulse/swipe_impulse_example.gd" type="Script" id=2]
-[ext_resource path="res://examples/swipe-impulse/point.tscn" type="PackedScene" id=3]
+[ext_resource path="res://examples/resources/point.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/swipe-detector/swipe_detector.gd" type="Script" id=4]
 [ext_resource path="res://addons/swipe-detector/icon.png" type="Texture" id=5]
 
@@ -22,41 +22,43 @@ script = ExtResource( 2 )
 
 [node name="Points" type="Node2D" parent="."]
 
-editor/display_folded = true
-
 [node name="Point" parent="Points" instance=ExtResource( 3 )]
 
 position = Vector2( 334.037, 230.485 )
-linear_damp = -1.0
-angular_damp = -1.0
+bounce = 1.0
+gravity_scale = 0.0
+point_scale = 3.0
 
 [node name="Point1" parent="Points" instance=ExtResource( 3 )]
 
 position = Vector2( 484.353, 330.696 )
-linear_damp = -1.0
-angular_damp = -1.0
+bounce = 1.0
+gravity_scale = 0.0
+point_scale = 3.0
 
 [node name="Point2" parent="Points" instance=ExtResource( 3 )]
 
 position = Vector2( 673.083, 193.741 )
-linear_damp = -1.0
-angular_damp = -1.0
+bounce = 1.0
+gravity_scale = 0.0
+point_scale = 3.0
 
 [node name="Point3" parent="Points" instance=ExtResource( 3 )]
 
 position = Vector2( 704.817, 489.364 )
-linear_damp = -1.0
-angular_damp = -1.0
+bounce = 1.0
+gravity_scale = 0.0
+point_scale = 3.0
 
 [node name="Point4" parent="Points" instance=ExtResource( 3 )]
 
 position = Vector2( 260.548, 462.641 )
-linear_damp = -1.0
-angular_damp = -1.0
+bounce = 1.0
+gravity_scale = 0.0
+point_scale = 3.0
 
 [node name="Bounds" type="StaticBody2D" parent="."]
 
-editor/display_folded = true
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
@@ -72,7 +74,7 @@ shape = SubResource( 1 )
 
 [node name="VerticalBound1" type="CollisionShape2D" parent="Bounds"]
 
-position = Vector2( 1033.13, 302.303 )
+position = Vector2( 973.13, 302.303 )
 shape = SubResource( 1 )
 
 [node name="HorizontalBound" type="CollisionShape2D" parent="Bounds"]

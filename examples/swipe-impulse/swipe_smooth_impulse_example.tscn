@@ -2,7 +2,7 @@
 
 [ext_resource path="res://examples/example.tscn" type="PackedScene" id=1]
 [ext_resource path="res://examples/swipe-impulse/swipe_smooth_impulse_example.gd" type="Script" id=2]
-[ext_resource path="res://examples/swipe-impulse/point.tscn" type="PackedScene" id=3]
+[ext_resource path="res://examples/resources/point.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/swipe-detector/swipe_detector.gd" type="Script" id=4]
 [ext_resource path="res://addons/swipe-detector/icon.png" type="Texture" id=5]
 
@@ -22,47 +22,50 @@ script = ExtResource( 2 )
 
 [node name="Points" type="Node2D" parent="."]
 
-editor/display_folded = true
-
 [node name="Point" parent="Points" instance=ExtResource( 3 )]
 
 position = Vector2( 131.235, 182.499 )
-linear_damp = -1.0
-angular_damp = -1.0
+bounce = 1.0
+gravity_scale = 0.0
+point_scale = 3.0
 
 [node name="Point1" parent="Points" instance=ExtResource( 3 )]
 
 position = Vector2( 397.806, 153.791 )
-linear_damp = -1.0
-angular_damp = -1.0
+bounce = 1.0
+gravity_scale = 0.0
+point_scale = 3.0
 
 [node name="Point2" parent="Points" instance=ExtResource( 3 )]
 
 position = Vector2( 307.582, 305.531 )
-linear_damp = -1.0
-angular_damp = -1.0
+bounce = 1.0
+gravity_scale = 0.0
+point_scale = 3.0
 
 [node name="Point3" parent="Points" instance=ExtResource( 3 )]
 
 position = Vector2( 638.576, 221.105 )
-linear_damp = -1.0
-angular_damp = -1.0
+bounce = 1.0
+gravity_scale = 0.0
+point_scale = 3.0
 
 [node name="Point5" parent="Points" instance=ExtResource( 3 )]
 
 position = Vector2( 851.397, 311.786 )
-linear_damp = -1.0
-angular_damp = -1.0
+bounce = 1.0
+gravity_scale = 0.0
+point_scale = 3.0
 
 [node name="Point4" parent="Points" instance=ExtResource( 3 )]
 
 position = Vector2( 645.922, 436.766 )
-linear_damp = -1.0
-angular_damp = -1.0
+bounce = 1.0
+gravity_scale = 0.0
+point_scale = 3.0
 
 [node name="Bounds" type="StaticBody2D" parent="."]
 
-editor/display_folded = true
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
@@ -78,7 +81,7 @@ shape = SubResource( 1 )
 
 [node name="VerticalBound1" type="CollisionShape2D" parent="Bounds"]
 
-position = Vector2( 1033.13, 302.303 )
+position = Vector2( 971.409, 303.303 )
 shape = SubResource( 1 )
 
 [node name="HorizontalBound" type="CollisionShape2D" parent="Bounds"]

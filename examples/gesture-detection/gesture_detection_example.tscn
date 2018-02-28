@@ -1,49 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://examples/example.tscn" type="PackedScene" id=1]
 [ext_resource path="res://examples/gesture-detection/gesture_detection_example.gd" type="Script" id=2]
-[ext_resource path="res://addons/swipe-detector/swipe_detector.gd" type="Script" id=3]
-[ext_resource path="res://addons/swipe-detector/icon.png" type="Texture" id=4]
-[ext_resource path="res://examples/gesture-detection/trail-particle.png" type="Texture" id=5]
+[ext_resource path="res://examples/resources/theme.tres" type="Theme" id=3]
+[ext_resource path="res://addons/swipe-detector/swipe_detector.gd" type="Script" id=4]
+[ext_resource path="res://addons/swipe-detector/icon.png" type="Texture" id=5]
 [ext_resource path="res://examples/gesture-detection/trail_ghost.tscn" type="PackedScene" id=6]
-
-[sub_resource type="ParticlesMaterial" id=1]
-
-render_priority = 0
-trail_divisor = 1
-emission_shape = 0
-flag_align_y = false
-flag_rotate_y = false
-flag_disable_z = true
-spread = 45.0
-flatness = 0.0
-gravity = Vector3( 0, 98, 0 )
-initial_velocity = 1.0
-initial_velocity_random = 0.0
-angular_velocity = 3332.39
-angular_velocity_random = 0.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-linear_accel = 0.0
-linear_accel_random = 0.0
-radial_accel = 0.0
-radial_accel_random = 0.0
-tangential_accel = 0.0
-tangential_accel_random = 0.0
-damping = 0.0
-damping_random = 0.0
-angle = 0.0
-angle_random = 0.0
-scale = 1.0
-scale_random = 0.0
-color = Color( 1, 1, 1, 1 )
-hue_variation = 0.0
-hue_variation_random = 0.0
-anim_speed = 0.0
-anim_speed_random = 0.0
-anim_offset = 0.0
-anim_offset_random = 0.0
-anim_loop = false
+[ext_resource path="res://examples/resources/spot_red.png" type="Texture" id=7]
+[ext_resource path="res://examples/resources/Trail.tscn" type="PackedScene" id=8]
 
 [node name="GestureDetectionExample" instance=ExtResource( 1 )]
 
@@ -60,26 +24,27 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 367.0
-margin_top = 281.0
-margin_right = 450.0
-margin_bottom = 295.0
-rect_scale = Vector2( 3, 3 )
+margin_left = 414.0
+margin_top = 292.0
+margin_right = 518.0
+margin_bottom = 316.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
+theme = ExtResource( 3 )
 text = "Recording..."
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+_sections_unfolded = [ "Theme" ]
 
 [node name="SwipeDetector" type="Node" parent="."]
 
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 __meta__ = {
-"_editor_icon": ExtResource( 4 )
+"_editor_icon": ExtResource( 5 )
 }
 detect_gesture = true
 process_method = null
@@ -101,52 +66,32 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 707.0
 margin_top = 550.0
-margin_right = 818.0
-margin_bottom = 579.0
-rect_scale = Vector2( 2, 2 )
+margin_right = 926.0
+margin_bottom = 612.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
+theme = ExtResource( 3 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "Record Gesture"
 flat = false
+_sections_unfolded = [ "Theme" ]
 
-[node name="Trail" type="Particles2D" parent="."]
+[node name="RecordingState" parent="." instance=ExtResource( 6 )]
 
-position = Vector2( -118.912, 157.892 )
-emitting = true
-amount = 20
-lifetime = 0.2
-one_shot = false
-preprocess = 0.0
-speed_scale = 1.0
-explosiveness = 0.0
-randomness = 0.0
-fixed_fps = 0
-fract_delta = true
-visibility_rect = Rect2( -100, -100, 200, 200 )
-local_coords = false
-draw_order = 0
-process_material = SubResource( 1 )
-texture = ExtResource( 5 )
-normal_map = null
-h_frames = 1
-v_frames = 1
-_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time" ]
-
-[node name="TrailGhost" parent="." instance=ExtResource( 6 )]
-
-self_modulate = Color( 0.898438, 0.765076, 0.765076, 1 )
-position = Vector2( 670.529, 580.305 )
+modulate = Color( 1, 1, 1, 0.3 )
+position = Vector2( 655.016, 578.089 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 7 )
+_sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="Match" type="VBoxContainer" parent="."]
 
-editor/display_folded = true
 visible = false
 anchor_left = 0.0
 anchor_top = 0.0
@@ -184,6 +129,8 @@ text = "Match Detected!"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="Trail" parent="." instance=ExtResource( 8 )]
 
 [connection signal="pattern_detected" from="SwipeDetector" to="." method="_on_SwipeDetector_pattern_detected"]
 

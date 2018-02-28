@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="128"
+   height="128"
+   viewBox="0 0 33.866666 33.866668"
+   version="1.1"
+   id="svg938"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
+   sodipodi:docname="images.svg"
+   inkscape:export-filename="/home/arypbatista/Workspaces/godot/assets/godot-swipe-detector/examples/resources/spot_red.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
+  <defs
+     id="defs932" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="88.649211"
+     inkscape:cy="69.788368"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer5"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1920"
+     inkscape:window-height="1052"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata935">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Red"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-263.13333)"
+     style="display:none"
+     sodipodi:insensitive="true">
+    <ellipse
+       style="opacity:1;fill:#e84a5f;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:17.19298744;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0;paint-order:stroke fill markers"
+       id="path1483"
+       cx="16.933334"
+       cy="280.06665"
+       rx="16.933334"
+       ry="16.933331" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Orange"
+     style="display:none"
+     transform="translate(0,16.933333)"
+     sodipodi:insensitive="true">
+    <ellipse
+       style="opacity:1;fill:#ff847c;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:17.19298744;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0;paint-order:stroke fill markers"
+       id="path1483-7"
+       cx="16.933334"
+       cy="2.0158684e-06"
+       rx="16.933334"
+       ry="16.933331" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Yellow"
+     style="display:none"
+     transform="translate(0,16.933333)"
+     sodipodi:insensitive="true">
+    <ellipse
+       style="opacity:1;fill:#fecea8;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:17.19298744;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0;paint-order:stroke fill markers"
+       id="path1483-7-3"
+       cx="16.933334"
+       cy="2.0158684e-06"
+       rx="16.933334"
+       ry="16.933331" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Green"
+     transform="translate(0,16.933333)"
+     style="display:none"
+     sodipodi:insensitive="true">
+    <ellipse
+       style="opacity:1;fill:#99b898;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:17.19298744;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0;paint-order:stroke fill markers"
+       id="path1483-7-5"
+       cx="16.933334"
+       cy="2.0158684e-06"
+       rx="16.933334"
+       ry="16.933331" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="Disk"
+     style="display:inline">
+    <ellipse
+       style="display:inline;opacity:1;fill:#99b898;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:17.19298744;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0;paint-order:stroke fill markers"
+       id="path1483-7-5-6"
+       cx="16.933334"
+       cy="16.933336"
+       rx="16.933334"
+       ry="16.933331" />
+    <ellipse
+       style="display:inline;opacity:1;fill:#000000;fill-opacity:0.22110554;fill-rule:evenodd;stroke:none;stroke-width:10.28509045;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0;paint-order:stroke fill markers"
+       id="path1483-7-5-6-2"
+       cx="16.933334"
+       cy="16.933336"
+       rx="10.129764"
+       ry="10.129761" />
+  </g>
+  <g
+     style="display:none"
+     inkscape:label="Disk Drag"
+     id="g1600"
+     inkscape:groupmode="layer">
+    <ellipse
+       ry="16.933331"
+       rx="16.933334"
+       cy="16.933336"
+       cx="16.933334"
+       id="ellipse1588"
+       style="display:inline;opacity:1;fill:#99b898;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:17.19298744;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0;paint-order:stroke fill markers" />
+    <ellipse
+       ry="10.129761"
+       rx="10.129764"
+       cy="16.933336"
+       cx="16.933334"
+       id="ellipse1590"
+       style="display:inline;opacity:1;fill:#000000;fill-opacity:0.22110554;fill-rule:evenodd;stroke:none;stroke-width:10.28509045;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0;paint-order:stroke fill markers" />
+    <flowRoot
+       transform="matrix(0.26458334,0,0,0.26458334,-0.4102134,-0.81350048)"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:27.5px;line-height:125%;font-family:'EB Garamond Initials';-inkscape-font-specification:'EB Garamond Initials';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="flowRoot1598"
+       xml:space="preserve"><flowRegion
+         style="fill:#ffffff"
+         id="flowRegion1594"><rect
+           style="fill:#ffffff"
+           y="48.703026"
+           x="32.829956"
+           height="33.335033"
+           width="61.114227"
+           id="rect1592" /></flowRegion><flowPara
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Roboto;-inkscape-font-specification:Roboto;fill:#ffffff"
+         id="flowPara1596">Drag</flowPara></flowRoot>  </g>
+</svg>

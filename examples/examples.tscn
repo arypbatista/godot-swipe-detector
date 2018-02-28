@@ -1,78 +1,84 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://examples/examples.gd" type="Script" id=1]
+[ext_resource path="res://examples/resources/theme.tres" type="Theme" id=1]
+[ext_resource path="res://examples/examples.gd" type="Script" id=2]
 
-[node name="Examples" type="Container"]
-
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-script = ExtResource( 1 )
-_sections_unfolded = [ "Margin", "Rect" ]
-
-[node name="PanelContainer" type="PanelContainer" parent="."]
-
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -65.0
-margin_top = -64.0
-margin_right = 65.0
-margin_bottom = 64.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+[node name="Examples" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 123.0
-margin_bottom = 121.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Anchor", "Margin", "Rect", "Theme" ]
+
+[node name="Panel" type="Panel" parent="."]
+
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -112.0
+margin_right = 200.0
+margin_bottom = 118.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Anchor", "Margin", "Rect", "Visibility", "custom_styles" ]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 1
+_sections_unfolded = [ "Anchor", "Margin" ]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 116.0
-margin_bottom = 114.0
+margin_right = 360.0
+margin_bottom = 190.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
-size_flags_horizontal = 1
+size_flags_horizontal = 3
 size_flags_vertical = 1
 custom_constants/separation = 30
 alignment = 1
+_sections_unfolded = [ "Size Flags", "custom_constants" ]
 
-[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Panel/HBoxContainer/VBoxContainer"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 116.0
-margin_bottom = 14.0
+margin_top = 23.0
+margin_right = 360.0
+margin_bottom = 47.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -84,15 +90,15 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="OptionButton" type="OptionButton" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="OptionButton" type="OptionButton" parent="Panel/HBoxContainer/VBoxContainer"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 44.0
-margin_right = 116.0
-margin_bottom = 64.0
+margin_top = 77.0
+margin_right = 360.0
+margin_bottom = 107.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -108,19 +114,35 @@ align = 0
 selected = -1
 items = [  ]
 
-[node name="Button" type="Button" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/VBoxContainer"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 94.0
-margin_right = 116.0
-margin_bottom = 114.0
+margin_top = 137.0
+margin_right = 360.0
+margin_bottom = 167.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 1
+
+[node name="Button" type="Button" parent="Panel/HBoxContainer/VBoxContainer/HBoxContainer"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 141.0
+margin_right = 218.0
+margin_bottom = 30.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
-size_flags_horizontal = 1
+size_flags_horizontal = 0
 size_flags_vertical = 1
 toggle_mode = false
 enabled_focus_mode = 2
@@ -128,7 +150,8 @@ shortcut = null
 group = null
 text = "Launch"
 flat = false
+_sections_unfolded = [ "Size Flags" ]
 
-[connection signal="pressed" from="PanelContainer/HBoxContainer/VBoxContainer/Button" to="." method="launch"]
+[connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/HBoxContainer/Button" to="." method="launch"]
 
 

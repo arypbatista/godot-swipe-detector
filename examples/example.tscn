@@ -1,71 +1,94 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://examples/resources/theme.tres" type="Theme" id=1]
 
 [sub_resource type="GDScript" id=1]
 
 script/source = "extends Label
 
 func _ready():
-	set_text(get_parent().get_name())"
+  set_text(get_parent().get_name())"
 
 [sub_resource type="GDScript" id=2]
 
 script/source = "extends Button
 
 func _on_BackButton_pressed():
-	get_tree().change_scene('res://examples/examples.tscn')
+  get_tree().change_scene('res://examples/examples.tscn')
 "
 
-[node name="Example" type="Node2D" index="0"]
+[node name="Example" type="Node2D"]
 
-[node name="ExampleName" type="Label" parent="." index="0"]
+[node name="ExampleName" type="Label" parent="."]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 20.0
-margin_top = 19.0
-margin_right = 132.0
-margin_bottom = 33.0
-rect_scale = Vector2( 2, 2 )
+margin_left = 112.0
+margin_top = 17.0
+margin_right = 482.0
+margin_bottom = 74.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
-mouse_default_cursor_shape = 0
 size_flags_horizontal = 2
 size_flags_vertical = 0
+theme = ExtResource( 1 )
 text = "<Example Name>"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 script = SubResource( 1 )
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Rect", "Size Flags", "Theme", "Visibility", "custom_fonts" ]
 
-[node name="BackButton" type="Button" parent="." index="1"]
+[node name="BackButton" type="Button" parent="."]
+
+modulate = Color( 0.6, 0.721569, 0.596078, 1 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 17.0
+margin_top = 43.0
+margin_right = 289.0
+margin_bottom = 73.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+theme = ExtResource( 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "< Return to example selection"
+flat = true
+script = SubResource( 2 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="Label" type="Label" parent="."]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 896.0
-margin_top = 4.0
-margin_right = 916.0
-margin_bottom = 24.0
-rect_scale = Vector2( 3, 3 )
+margin_left = 25.0
+margin_top = 17.0
+margin_right = 105.0
+margin_bottom = 41.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "X"
-flat = false
-align = 1
-script = SubResource( 2 )
+mouse_filter = 2
+size_flags_horizontal = 1
+size_flags_vertical = 4
+theme = ExtResource( 1 )
+text = "Example:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Theme" ]
 
 [connection signal="pressed" from="BackButton" to="BackButton" method="_on_BackButton_pressed"]
 

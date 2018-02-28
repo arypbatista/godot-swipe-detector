@@ -1,39 +1,41 @@
-extends Container
+extends Control
 
 
-onready var dropdown = get_node('PanelContainer/HBoxContainer/VBoxContainer/OptionButton')
+onready var dropdown = $Panel/HBoxContainer/VBoxContainer/OptionButton
 var options
 
 func load_options():
-  options  = []
-  options.append('swipe-spawner/swipe_spawner')
-  options.append('swipe-spawner/point_limited_swipe_spawner')
-  options.append('swipe-spawner/duration_limited_swipe_spawner')
-  options.append('swipe-impulse/swipe_impulse')
-  options.append('swipe-impulse/swipe_smooth_impulse')
-  options.append('swipe-impulse/swipe_touch_smooth_impulse')
-  options.append('swipe-signals/swipe_signals')
-  options.append('swipe-trail/swipe_trail')
-  options.append('swipe-areas/swipe_areas')
-  options.append('swipe-direction/swipe_direction')
-  options.append('gesture-detection/gesture_detection')
-  options.append('gesture-detection/gesture_detection_with_patterns')
+  options  = {}
+  options['Spawn points'] = 'swipe-spawner/swipe_spawner'
+  options['Spawn points with limit'] = 'swipe-spawner/point_limited_swipe_spawner'
+  options['Spawn points with duration limit'] = 'swipe-spawner/duration_limited_swipe_spawner'
+  options['Impulse disks'] = 'swipe-impulse/swipe_impulse'
+  options['Drag disks smoothly'] = 'swipe-impulse/swipe_smooth_impulse'
+  options['Signals'] = 'swipe-signals/swipe_signals'
+  options['Trail'] = 'swipe-trail/swipe_trail'
+  options['Two areas'] = 'swipe-areas/swipe_areas'
+  options['Swipe direction'] = 'swipe-direction/swipe_direction'
+  options['Experimental: Gesture detection'] = 'gesture-detection/gesture_detection'
+  options['Experimental: Gesture detection with patterns'] = 'gesture-detection/gesture_detection_with_patterns'
 
 func populate_dropdown():
-  for option in options:
-    dropdown.add_item(option.split('/')[1])
+  for option in options.keys():
+    dropdown.add_item(option)
 
 func _ready():
   load_options()
   populate_dropdown()
 
 func launch():
-  var selected_example = 0
-  if dropdown.get_selected() > 0:
-    selected_example = dropdown.get_selected()
-    
-  print('Selected example ', selected_example)
-  load_example(options[selected_example])
+  if dropdown.get_selected() > -1:
+    var selected_example = 0
+    var selected_name = 'None'
+    selected_name = options.keys()[dropdown.get_selected()]
+    selected_example = options[selected_name]
+    print('Selected example ', selected_name, ' : ', selected_example)
+    load_example(selected_example)
+  else:
+    print('No example selected')
 
 func load_example(example):
   print('Loading example ', example)

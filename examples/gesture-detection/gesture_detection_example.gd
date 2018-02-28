@@ -12,14 +12,17 @@ onready var recordedGesture = get_node('RecordedGesture')
 onready var matchDetected = get_node('Match')
 onready var matchGesture = get_node('MatchGesture')
   
+  
 func is_recording():
   return recording
 
 func record_start():
   recording = true
   recordingLabel.show()
+  $RecordingState.modulate.a = 1.0
   
 func record_end(gesture):
+  $RecordingState.modulate.a = 0.3
   recording = false
   recordingLabel.hide()
   swipeDetector.remove_pattern_detections()

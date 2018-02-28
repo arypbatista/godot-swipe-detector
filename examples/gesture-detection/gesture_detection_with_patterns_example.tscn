@@ -1,58 +1,27 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://examples/example.tscn" type="PackedScene" id=1]
 [ext_resource path="res://examples/gesture-detection/gesture_detection_with_patterns_example.gd" type="Script" id=2]
 [ext_resource path="res://addons/swipe-detector/swipe_detector.gd" type="Script" id=3]
 [ext_resource path="res://addons/swipe-detector/icon.png" type="Texture" id=4]
 [ext_resource path="res://examples/gesture-detection/trail_ghost.tscn" type="PackedScene" id=5]
-[ext_resource path="res://examples/gesture-detection/trail-particle.png" type="Texture" id=6]
-[ext_resource path="res://examples/gesture-detection/direction.png" type="Texture" id=7]
-
-[sub_resource type="ParticlesMaterial" id=1]
-
-render_priority = 0
-trail_divisor = 1
-emission_shape = 0
-flag_align_y = false
-flag_rotate_y = false
-flag_disable_z = true
-spread = 45.0
-flatness = 0.0
-gravity = Vector3( 0, 98, 0 )
-initial_velocity = 1.0
-initial_velocity_random = 0.0
-angular_velocity = 9.29526e+18
-angular_velocity_random = 0.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-linear_accel = 0.0
-linear_accel_random = 0.0
-radial_accel = 0.0
-radial_accel_random = 0.0
-tangential_accel = 0.0
-tangential_accel_random = 0.0
-damping = 0.0
-damping_random = 0.0
-angle = 0.0
-angle_random = 0.0
-scale = 1.0
-scale_random = 0.0
-color = Color( 1, 1, 1, 1 )
-hue_variation = 0.0
-hue_variation_random = 0.0
-anim_speed = 0.0
-anim_speed_random = 0.0
-anim_offset = 0.0
-anim_offset_random = 0.0
-anim_loop = false
+[ext_resource path="res://examples/resources/spot_orange.png" type="Texture" id=6]
+[ext_resource path="res://examples/resources/spot_red.png" type="Texture" id=7]
+[ext_resource path="res://examples/resources/spot_yellow.png" type="Texture" id=8]
+[ext_resource path="res://examples/resources/arrow.png" type="Texture" id=9]
+[ext_resource path="res://examples/resources/Trail.tscn" type="PackedScene" id=10]
+[ext_resource path="res://examples/resources/spot_green.png" type="Texture" id=11]
 
 [node name="GestureDetectionWithPatternsExample" instance=ExtResource( 1 )]
 
 script = ExtResource( 2 )
 
+[node name="BackButton" parent="."]
+
+margin_right = 293.0
+
 [node name="SwipeDetector" type="Node" parent="."]
 
-editor/display_folded = true
 script = ExtResource( 3 )
 __meta__ = {
 "_editor_icon": ExtResource( 4 )
@@ -72,162 +41,168 @@ debug_mode = false
 [node name="Circle" type="Node2D" parent="SwipeDetector"]
 
 editor/display_folded = true
+modulate = Color( 1, 1, 1, 0.386745 )
 position = Vector2( -253.233, 91.9477 )
 
 [node name="TrailGhost" parent="SwipeDetector/Circle" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 0.0859375, 1, 1 )
 position = Vector2( 687.957, 185.192 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 6 )
 
 [node name="TrailGhost1" parent="SwipeDetector/Circle" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 0.0859375, 1, 1 )
 position = Vector2( 647.259, 111.332 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 6 )
 
 [node name="TrailGhost2" parent="SwipeDetector/Circle" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 0.0859375, 1, 1 )
 position = Vector2( 648.766, 26.9211 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 6 )
 
 [node name="TrailGhost3" parent="SwipeDetector/Circle" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 0.0859375, 1, 1 )
 position = Vector2( 731.67, -13.7771 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 6 )
 
 [node name="TrailGhost4" parent="SwipeDetector/Circle" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 0.0859375, 1, 1 )
 position = Vector2( 816.081, -0.21106 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 6 )
 
 [node name="TrailGhost5" parent="SwipeDetector/Circle" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 0.0859375, 1, 1 )
 position = Vector2( 843.213, 67.6192 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 6 )
 
 [node name="TrailGhost6" parent="SwipeDetector/Circle" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 0.0859375, 1, 1 )
 position = Vector2( 841.706, 147.508 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 6 )
 
 [node name="TrailGhost7" parent="SwipeDetector/Circle" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 0.0859375, 1, 1 )
 position = Vector2( 773.876, 191.221 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 6 )
 
 [node name="Square" type="Node2D" parent="SwipeDetector"]
 
+editor/display_folded = true
+modulate = Color( 1, 1, 1, 0.386745 )
 position = Vector2( 28.6394, 39.1909 )
 
 [node name="Point1" parent="SwipeDetector/Square" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 1, 0.179688, 1 )
-position = Vector2( 644.244, 305.779 )
+position = Vector2( 638.803, 322.103 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 7 )
 
 [node name="Point2" parent="SwipeDetector/Square" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 1, 0.179688, 1 )
-position = Vector2( 757.295, 304.272 )
+position = Vector2( 727.367, 317.876 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 7 )
 
 [node name="Point3" parent="SwipeDetector/Square" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 1, 0.179688, 1 )
-position = Vector2( 850.75, 302.764 )
+position = Vector2( 812.66, 315.007 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 7 )
 
 [node name="Point4" parent="SwipeDetector/Square" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 1, 0.179688, 1 )
-position = Vector2( 855.272, 391.697 )
+position = Vector2( 815.821, 405.301 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 7 )
 
 [node name="Point5" parent="SwipeDetector/Square" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 1, 0.179688, 1 )
-position = Vector2( 859.794, 476.108 )
+position = Vector2( 812.181, 489.712 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 7 )
 
 [node name="Point6" parent="SwipeDetector/Square" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 1, 0.179688, 1 )
-position = Vector2( 755.788, 483.645 )
+position = Vector2( 728.581, 494.528 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 7 )
 
 [node name="Point7" parent="SwipeDetector/Square" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 1, 0.179688, 1 )
-position = Vector2( 647.259, 488.167 )
+position = Vector2( 647.259, 485.446 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 7 )
 
 [node name="Point8" parent="SwipeDetector/Square" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 1, 0.179688, 1 )
-position = Vector2( 647.259, 400.741 )
+position = Vector2( 641.818, 403.462 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 7 )
 
 [node name="ZigZag" type="Node2D" parent="SwipeDetector"]
 
 editor/display_folded = true
+modulate = Color( 1, 1, 1, 0.386745 )
 position = Vector2( -132.646, 43.7128 )
 
 [node name="TrailGhost16" parent="SwipeDetector/ZigZag" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 1, 0.929688, 1 )
-position = Vector2( 216.16, 441.439 )
+position = Vector2( 203.917, 464.565 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 8 )
 
 [node name="TrailGhost17" parent="SwipeDetector/ZigZag" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 1, 0.929688, 1 )
-position = Vector2( 220.682, 349.492 )
+position = Vector2( 241.088, 386.222 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 8 )
 
 [node name="TrailGhost18" parent="SwipeDetector/ZigZag" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 1, 0.929688, 1 )
-position = Vector2( 256.858, 257.544 )
+position = Vector2( 277.264, 294.274 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 8 )
 
 [node name="TrailGhost19" parent="SwipeDetector/ZigZag" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 1, 0.929688, 1 )
-position = Vector2( 308.108, 323.867 )
+position = Vector2( 328.514, 360.597 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 8 )
 
 [node name="TrailGhost20" parent="SwipeDetector/ZigZag" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 1, 0.929688, 1 )
-position = Vector2( 353.328, 405.263 )
+position = Vector2( 373.734, 441.993 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 8 )
 
 [node name="TrailGhost21" parent="SwipeDetector/ZigZag" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 1, 0.929688, 1 )
-position = Vector2( 401.563, 488.167 )
+position = Vector2( 421.969, 524.897 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 8 )
 
 [node name="TrailGhost22" parent="SwipeDetector/ZigZag" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 1, 0.929688, 1 )
-position = Vector2( 443.768, 406.771 )
+position = Vector2( 464.174, 443.501 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 8 )
 
 [node name="TrailGhost23" parent="SwipeDetector/ZigZag" instance=ExtResource( 5 )]
 
-self_modulate = Color( 0, 1, 0.929688, 1 )
-position = Vector2( 466.378, 326.882 )
-
-[node name="Trail" type="Particles2D" parent="."]
-
-position = Vector2( -118.912, 157.892 )
-emitting = true
-amount = 20
-lifetime = 0.2
-one_shot = false
-preprocess = 0.0
-speed_scale = 1.0
-explosiveness = 0.0
-randomness = 0.0
-fixed_fps = 0
-fract_delta = true
-visibility_rect = Rect2( -100, -100, 200, 200 )
-local_coords = false
-draw_order = 0
-process_material = SubResource( 1 )
-texture = ExtResource( 6 )
-normal_map = null
-h_frames = 1
-v_frames = 1
-_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time" ]
+position = Vector2( 486.784, 363.612 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 8 )
 
 [node name="Match" type="VBoxContainer" parent="."]
 
+editor/display_folded = true
 visible = false
 anchor_left = 0.0
 anchor_top = 0.0
@@ -283,67 +258,82 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Sprite" type="Sprite" parent="."]
-
-position = Vector2( 779.294, 388.894 )
-scale = Vector2( 3, 3 )
-texture = ExtResource( 7 )
-
 [node name="Sprite3" type="Sprite" parent="."]
 
-position = Vector2( 428.084, 197.461 )
-rotation = -1.79081
-scale = Vector2( 3, 3 )
-texture = ExtResource( 7 )
+self_modulate = Color( 1, 1, 1, 0.607726 )
+position = Vector2( 347.822, 250.516 )
+rotation = -2.08817
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 9 )
 
 [node name="Sprite4" type="Sprite" parent="."]
 
-position = Vector2( 464.261, 123.602 )
-rotation = -0.282155
-scale = Vector2( 3, 3 )
-texture = ExtResource( 7 )
+self_modulate = Color( 1, 1, 1, 0.607726 )
+position = Vector2( 392.161, 56.9437 )
+rotation = -0.440129
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 9 )
 
 [node name="Sprite8" type="Sprite" parent="."]
 
-position = Vector2( 544.15, 149.227 )
-rotation = 1.20456
-scale = Vector2( 3, 3 )
-texture = ExtResource( 7 )
+self_modulate = Color( 1, 1, 1, 0.607726 )
+position = Vector2( 642.097, 176.434 )
+rotation = 1.52707
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 9 )
 
 [node name="Sprite5" type="Sprite" parent="."]
 
-position = Vector2( 126.617, 473.305 )
-rotation = -1.40875
-scale = Vector2( 3, 3 )
-texture = ExtResource( 7 )
+self_modulate = Color( 1, 1, 1, 0.607726 )
+position = Vector2( 140.122, 498.955 )
+rotation = -1.06915
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 9 )
 
 [node name="Sprite6" type="Sprite" parent="."]
 
-position = Vector2( 307.497, 548.672 )
+self_modulate = Color( 1, 1, 1, 0.607726 )
+position = Vector2( 383.052, 527.784 )
 rotation = -1.1145
-scale = Vector2( 3, 3 )
-texture = ExtResource( 7 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 9 )
 
 [node name="Sprite7" type="Sprite" parent="."]
 
-position = Vector2( 189.925, 514.003 )
-rotation = 1.26882
-scale = Vector2( 3, 3 )
-texture = ExtResource( 7 )
+self_modulate = Color( 1, 1, 1, 0.607726 )
+position = Vector2( 256.616, 388.96 )
+rotation = 1.09286
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+self_modulate = Color( 1, 1, 1, 0.607726 )
+position = Vector2( 753.447, 299.109 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 9 )
 
 [node name="Sprite1" type="Sprite" parent="."]
 
-position = Vector2( 835.066, 437.128 )
-rotation = 1.51215
-scale = Vector2( 3, 3 )
-texture = ExtResource( 7 )
+self_modulate = Color( 1, 1, 1, 0.607726 )
+position = Vector2( 911.247, 431.686 )
+rotation = 1.55076
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 9 )
 
 [node name="Sprite2" type="Sprite" parent="."]
 
-position = Vector2( 785.324, 477.827 )
-rotation = 3.1783
-scale = Vector2( 3, 3 )
-texture = ExtResource( 7 )
+self_modulate = Color( 1, 1, 1, 0.607726 )
+position = Vector2( 752.675, 586.657 )
+rotation = 3.13335
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 9 )
+
+[node name="Trail" parent="." instance=ExtResource( 10 )]
+
+z = 100
+texture = ExtResource( 11 )
+_sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time", "Z" ]
 
 [connection signal="pattern_detected" from="SwipeDetector" to="." method="_on_SwipeDetector_pattern_detected"]
 
