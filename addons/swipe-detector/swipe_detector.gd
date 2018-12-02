@@ -263,8 +263,8 @@ func set_distance_threshold(value):
   distance_threshold = value
   return self
 
-func points_to_gesture(points):
-  return SwipeGesture.new(points)
+func points_to_gesture(points, area=null):
+  return SwipeGesture.new(area, points)
 
 
 
