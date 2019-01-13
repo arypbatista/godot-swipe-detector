@@ -133,6 +133,7 @@ admit complex gestures with more than six points, for example.
 - `Limit Points`: Indicates whether to limit swipe count points or not.
 - `Maximum Points`: Indicates the maximum point count for a swipe.
 - `Pattern Detection Threshold`: Indicates minimum score for pattern detection matching.
+- `Four Directions`: Restricts directions to only four (Up/Down/Right/Left).
 - `Debug Mode`: Enable/Disable debug output on console.
 
 
