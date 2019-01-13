@@ -80,6 +80,9 @@ export var maximum_points = -1
 # Threshold for gesture detection
 export var pattern_detection_score_threshold = 80
 
+# 4-directions mode for output in only four directions
+export var four_directions = false
+
 # Debug mode: will print debug information
 export var debug_mode = false
 
@@ -204,7 +207,7 @@ func swipe_start(area):
   debug('Swipe started on point ', point)
   state.capturing = true
   state.last_update_delta = 0.0
-  state.gesture = SwipeGesture.new(area)
+  state.gesture = SwipeGesture.new(area, [], four_directions)
   add_gesture_data(area, point)
   emit_signal('swipe_started', state.gesture)
   return self

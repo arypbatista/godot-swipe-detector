@@ -14,9 +14,12 @@ var relative # SwipeGesture with relative points
 var distance
 var distance_points
 
-func _init(area=null, points=[]):
+var four_directions
+
+func _init(area=null, points=[], four_directions=false):
   self.area = area
   self.points = points
+  self.four_directions = four_directions
   self.duration = 0
 
 func get_area():
@@ -104,8 +107,12 @@ func get_direction_vector():
 
 func get_direction_index():
   var angle_normalized = get_direction_angle() * -1
-  var percentage = angle_normalized/(PI*2.0) + 1.0/16
-  return int(floor(percentage * 8)) % 8
+  if four_directions:
+    var percentage = angle_normalized/(PI*2.0) + 1.0/8
+    return int(floor(percentage * 4)) % 4 * 2
+  else:
+    var percentage = angle_normalized/(PI*2.0) + 1.0/16
+    return int(floor(percentage * 8)) % 8
 
 func get_direction():
   return Directions.DIRECTIONS[get_direction_index()]
