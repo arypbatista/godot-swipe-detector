@@ -91,7 +91,7 @@ to set a recorded gesture as trigger pattern.
 
 ### Multiple Swipe Spaces using Area2D
 
-You can specify the area where detection occurs by attaching Area2D 
+You can specify the area where detection occurs by attaching Area2D
 children to SwipeDetector. A simple use case for this would be to
 implement a pong game where each player swipes over the screen to
 control the player's paddle.
@@ -104,7 +104,7 @@ regarding the area where it was originated.
 
 ```GDScript
 func _on_SwipeDetector_swipe_started( partial_gesture ):
-    print('Swipe started on area ', partial_gesture.get_area().get_name()) 
+    print('Swipe started on area ', partial_gesture.get_area().get_name())
 ```
 
 If not Area2D children are attached, gestures' `get_area()` method will return `null`.
@@ -133,7 +133,7 @@ admit complex gestures with more than six points, for example.
 - `Limit Points`: Indicates whether to limit swipe count points or not.
 - `Maximum Points`: Indicates the maximum point count for a swipe.
 - `Pattern Detection Threshold`: Indicates minimum score for pattern detection matching.
-- `Four Directions`: Restricts directions to only four (Up/Down/Right/Left).
+- `Directions Mode`: Switch between four or eight directions mode.
 - `Debug Mode`: Enable/Disable debug output on console.
 
 

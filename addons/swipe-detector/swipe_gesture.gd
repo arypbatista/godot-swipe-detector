@@ -1,5 +1,8 @@
 extends Node
 
+const FOUR_DIRECTIONS_MODE = 'Four Directions'
+const EIGHT_DIRECTIONS_MODE = 'Eight Directions'
+
 var Directions = preload('directions.gd').new()
 
 # Stores swipe data
@@ -14,13 +17,16 @@ var relative # SwipeGesture with relative points
 var distance
 var distance_points
 
-var four_directions
+var directions_mode
 
-func _init(area=null, points=[], four_directions=false):
+func _init(area=null, points=[], directions_mode=EIGHT_DIRECTIONS_MODE):
   self.area = area
   self.points = points
-  self.four_directions = four_directions
   self.duration = 0
+  set_directions_mode(directions_mode)
+
+func set_directions_mode(value):
+  self.directions_mode = value
 
 func get_area():
   return area
@@ -105,14 +111,19 @@ func get_direction_vector():
   # Normalized direction vector
   return (last_point() - first_point()).normalized()
 
-func get_direction_index():
+func get_direction_index(mode=null):
+  if mode == null:
+    mode = directions_mode
   var angle_normalized = get_direction_angle() * -1
-  if four_directions:
+  if mode == FOUR_DIRECTIONS_MODE:
     var percentage = angle_normalized/(PI*2.0) + 1.0/8
     return int(floor(percentage * 4)) % 4 * 2
-  else:
+  elif mode == EIGHT_DIRECTIONS_MODE:
     var percentage = angle_normalized/(PI*2.0) + 1.0/16
     return int(floor(percentage * 8)) % 8
+  else:
+    print('ERROR: Invalid directions_mode')
+    return 0
 
-func get_direction():
-  return Directions.DIRECTIONS[get_direction_index()]
+func get_direction(mode=null):
+  return Directions.DIRECTIONS[get_direction_index(mode)]

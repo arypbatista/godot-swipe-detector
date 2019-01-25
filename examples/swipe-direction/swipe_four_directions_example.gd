@@ -20,10 +20,10 @@ func _on_SwipeDetector_swipe_updated( partial_gesture ):
 func hide_spots():
   for spot in sectors.get_children():
     spot.hide()
-    
+
 func show_spot(index):
   sectors.get_children()[index].show()
-  
+
 func _on_SwipeDetector_swipe_ended( gesture ):
   trail.set_emitting(false)
   $Values/Direction.set_text(gesture.get_direction())

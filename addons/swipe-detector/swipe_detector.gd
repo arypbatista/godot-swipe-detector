@@ -80,8 +80,10 @@ export var maximum_points = -1
 # Threshold for gesture detection
 export var pattern_detection_score_threshold = 80
 
-# 4-directions mode for output in only four directions
-export var four_directions = false
+# Define the output mode of the get_directions method
+# - Four directions mode for output in only four directions (Up/Right/Down/Left)
+# - Eight directions mode for output in eight directions
+export (String, 'Four Directions', 'Eight Directions') var directions_mode = 'Eight Directions'
 
 # Debug mode: will print debug information
 export var debug_mode = false
@@ -138,7 +140,9 @@ func connect_detection_areas():
     area.connect('input_event', swipe_input, 'process_area_input', [area])
 
 func set_swipe_process(method, value):
-  set_process(!value)
+  set_process(false)
+  set_physics_process(false)
+  set_process_input(false)
   if swipe_input.has_method('process_input'):
     if detection_areas.size() > 0:
       set_process_input(false)
@@ -149,7 +153,7 @@ func set_swipe_process(method, value):
     if method == PROCESS_IDLE:
       set_process(value)
     elif method == PROCESS_FIXED:
-      set_fixed_process(value)
+      set_physics_process(value)
 
 func detect(detect=true):
   if ready == true:
@@ -167,7 +171,7 @@ func reached_duration_limit(area):
 func reached_limit(area):
   return reached_point_limit(area) or reached_duration_limit(area)
 
-func _fixed_process(delta):
+func _physics_process(delta):
   swipe_input.process(delta)
 
 func _process(delta):
@@ -207,7 +211,7 @@ func swipe_start(area):
   debug('Swipe started on point ', point)
   state.capturing = true
   state.last_update_delta = 0.0
-  state.gesture = SwipeGesture.new(area, [], four_directions)
+  state.gesture = SwipeGesture.new(area, [], directions_mode)
   add_gesture_data(area, point)
   emit_signal('swipe_started', state.gesture)
   return self

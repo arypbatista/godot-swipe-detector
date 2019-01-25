@@ -4,22 +4,12 @@
 [ext_resource path="res://examples/examples.gd" type="Script" id=2]
 
 [node name="Examples" type="Control"]
-
-anchor_left = 0.0
-anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
-_sections_unfolded = [ "Anchor", "Margin", "Rect", "Theme" ]
 
 [node name="Panel" type="Panel" parent="."]
-
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -28,130 +18,47 @@ margin_left = -200.0
 margin_top = -112.0
 margin_right = 200.0
 margin_bottom = 118.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Anchor", "Margin", "Rect", "Visibility", "custom_styles" ]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
-
-anchor_left = 0.0
-anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
 margin_top = 20.0
 margin_right = -20.0
 margin_bottom = -20.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-size_flags_horizontal = 1
-size_flags_vertical = 1
 alignment = 1
-_sections_unfolded = [ "Anchor", "Margin" ]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_right = 360.0
 margin_bottom = 190.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
 size_flags_horizontal = 3
-size_flags_vertical = 1
 custom_constants/separation = 30
 alignment = 1
-_sections_unfolded = [ "Size Flags", "custom_constants" ]
 
 [node name="Label" type="Label" parent="Panel/HBoxContainer/VBoxContainer"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_top = 23.0
 margin_right = 360.0
 margin_bottom = 47.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-size_flags_horizontal = 1
-size_flags_vertical = 4
 text = "Select an Example"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 [node name="OptionButton" type="OptionButton" parent="Panel/HBoxContainer/VBoxContainer"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_top = 77.0
 margin_right = 360.0
 margin_bottom = 107.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 toggle_mode = true
-action_mode = 0
-enabled_focus_mode = 2
-shortcut = null
-group = null
-flat = false
-align = 0
-selected = -1
-items = [  ]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/VBoxContainer"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_top = 137.0
 margin_right = 360.0
 margin_bottom = 167.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-size_flags_horizontal = 1
-size_flags_vertical = 1
 alignment = 1
 
 [node name="Button" type="Button" parent="Panel/HBoxContainer/VBoxContainer/HBoxContainer"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 141.0
 margin_right = 218.0
 margin_bottom = 30.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
 size_flags_horizontal = 0
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Launch"
-flat = false
-_sections_unfolded = [ "Size Flags" ]
 
 [connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer/HBoxContainer/Button" to="." method="launch"]
-
-
