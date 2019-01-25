@@ -15,6 +15,7 @@ func load_options():
   options['Trail'] = 'swipe-trail/swipe_trail'
   options['Two areas'] = 'swipe-areas/swipe_areas'
   options['Swipe direction'] = 'swipe-direction/swipe_direction'
+  options['Swipe direction (four directions)'] = 'swipe-direction/swipe_four_directions'
   options['Experimental: Gesture detection'] = 'gesture-detection/gesture_detection'
   options['Experimental: Gesture detection with patterns'] = 'gesture-detection/gesture_detection_with_patterns'
 
