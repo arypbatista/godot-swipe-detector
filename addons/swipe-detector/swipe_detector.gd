@@ -80,6 +80,10 @@ export var maximum_points = -1
 # Threshold for gesture detection
 export var pattern_detection_score_threshold = 80
 
+# Define the Input Event Mouse Button index
+enum Mouse_Buttons { ALL, LEFT, RIGHT, MIDDLE }
+export (Array, Mouse_Buttons) var mouse_buttons_for_swipe_started = [Mouse_Buttons.ALL]
+
 # Define the output mode of the get_directions method
 # - Four directions mode for output in only four directions (Up/Right/Down/Left)
 # - Eight directions mode for output in eight directions
@@ -133,6 +137,11 @@ func initialize_states():
     states['_singleton'] = DetectionState.new()
 
 func _input(ev):
+  # Customizing InputEventMouseButton to receive only buttons wanted by user
+  if ev is InputEventMouseButton and not mouse_buttons_for_swipe_started.has(Mouse_Buttons.ALL):
+    if not mouse_buttons_for_swipe_started.has(ev.button_index):
+      return
+
   swipe_input.process_input(ev)
 
 func connect_detection_areas():
